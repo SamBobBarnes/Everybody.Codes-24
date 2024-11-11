@@ -27,6 +27,16 @@ int Day2::Part3() {
         }
     }
     std::vector<std::string> lines = Helpers::readFile(filePath);
+    const int width = 200;
+    const int height = 107;
+
+
+    char grid[height][width];
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            grid[i][j] = lines[i][j];
+        }
+    }
 
     return total;
 }

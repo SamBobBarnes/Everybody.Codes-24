@@ -4,6 +4,8 @@
 #pragma once
 
 #include <vector>
+
+#include "FindResult.h"
 #include "../Helpers.h"
 
 #ifndef DAY2_H
@@ -18,6 +20,8 @@ public:
     static int Part3();
 
     static std::vector<std::string> split(std::string input);
+
+    static FindResult findWordOnGrid(int w, int h, char *grid, const std::string &wordToFind);
 
 private:
     static std::string reverse(std::string word) {

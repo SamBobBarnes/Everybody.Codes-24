@@ -4,5 +4,12 @@ project(Everybody_Codes_24)
 set(CMAKE_CXX_STANDARD 23)
 
 add_executable(Everybody_Codes_24 main.cpp
-        Day1.cpp
-        Day1.h)
+        Day1/Day1.cpp
+        Day1/Day1.h
+        Day2/Day2.h
+        Day2/Part1.cpp
+        tests/Day2.cpp
+        tests/Day2.cpp
+        Day2/Split.cpp)
+
+add_subdirectory(tests)

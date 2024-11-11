@@ -3,4 +3,6 @@ project(Everybody_Codes_24)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(Everybody_Codes_24 main.cpp)
+add_executable(Everybody_Codes_24 main.cpp
+        Day1.cpp
+        Day1.h)

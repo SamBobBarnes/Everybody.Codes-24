@@ -1,3 +1,0 @@
-/Users/sbarnes/Code/Everybody.Codes-24/cmake-build-debug/CMakeFiles/Everybody_Codes_24.dir
-/Users/sbarnes/Code/Everybody.Codes-24/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/sbarnes/Code/Everybody.Codes-24/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -17,8 +17,10 @@ public:
 
     static int Part3();
 
+    static std::vector<std::string> split(std::string input);
+
 private:
-    static std::string Day2::reverse(std::string word) {
+    static std::string reverse(std::string word) {
         std::string reverseWord;
         for (int i = word.length() - 1; i >= 0; i--) {
             reverseWord.push_back(word[i]);
@@ -26,7 +28,5 @@ private:
 
         return reverseWord;
     }
-
-    static std::vector<std::string> split(std::string input);
 };
 #endif //DAY2_H

@@ -3,6 +3,7 @@
 //
 
 
+#include <bitset>
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -43,7 +44,7 @@ int Day2::Part2() {
     for (const auto &line: lines) {
         std::vector<std::string> tokens = split(line);
         for (const auto &token: tokens) {
-            long symbols{0};
+            long long symbols{0};
             for (const auto &word: words) {
                 bool finished{false};
 
@@ -57,12 +58,14 @@ int Day2::Part2() {
                         break;
                     }
                     for (int i = 0; i < word.length(); i++) {
-                        symbols |= static_cast<long>(pow(2, index + i));
+                        long double mask = powl(2, (index + i));
+                        symbols |= (long long) mask;
                     }
                     printLine += token.substr(0, index) + alert + word + reset + token.substr(index + word.length());
                     pos = index + 1;
                     subtotal++;
                     // std::cout << printLine << std::endl;
+                    // std::cout << reverse(std::bitset<60>(symbols).to_string()) << std::endl;
                     printLine = "";
                 }
                 if (subtotal > 0) {

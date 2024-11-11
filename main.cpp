@@ -4,7 +4,15 @@
 #include "Day1/Day1.h"
 #include "Day2/Day2.h"
 
+
 int main() {
+    std::cout << "Running on ";
+#ifdef _WIN32
+    std::cout << "Windows";
+#else
+    std::cout << "Linux";
+#endif
+    std::cout << std::endl << std::endl;
     std::cout << "Current dir: " << Helpers::pwd() << std::endl;
     switch (2) {
         case 1:

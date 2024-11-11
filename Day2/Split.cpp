@@ -2,12 +2,13 @@
 // Created by Samuel Barnes on 11/11/24.
 //
 
+#include <utility>
 #include <vector>
 
 #include "Day2.h"
 
 std::vector<std::string> Day2::split(std::string input) {
-    std::string temp = input;
+    std::string temp = std::move(input);
     std::vector<std::string> result{};
     bool finished{false};
 

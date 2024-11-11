@@ -24,9 +24,6 @@ int Day2::Part2() {
         "DSSG", "WOW", "OO", "WP", "UOB", "GT", "A", "DPDVINCYYQ", "JW", "SXLE", "KJWV", "PKNW", "ZMNJHSVPWW", "RBY",
         "IFQF", "AXHIDHBYEW", "SM", "ECWJZXYPLY", "EOB", "QF", "VAGCFZRJUK"
     };
-    // std::vector<std::string> initialWords{
-    //     "GEL", "ELE"
-    // };
     std::vector<std::string> words{};
     for (const auto &word: initialWords) {
         words.push_back(word);
@@ -36,7 +33,6 @@ int Day2::Part2() {
         }
     }
     std::vector<std::string> lines = Helpers::readFile(filePath);
-    // std::vector<std::string> lines = {"GELELEN"};
 
 
     int total = 0;

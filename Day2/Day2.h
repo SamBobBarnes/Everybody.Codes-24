@@ -13,6 +13,9 @@ public:
 
     static int Part3();
 
+private:
+    static std::string reverse(std::string word);
+
     static std::vector<std::string> split(std::string input);
 };
 #endif //DAY2_H

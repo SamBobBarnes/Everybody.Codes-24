@@ -14,7 +14,7 @@ int main() {
         case 2:
             std::cout << "Day 2 - Part 1: " << Day2::Part1() << std::endl;
             std::cout << "Day 2 - Part 2: " << Day2::Part2() << std::endl;
-        // std::cout << "Day 2 - Part 3: " << Day2::Part3() << std::endl;
+            std::cout << "Day 2 - Part 3: " << Day2::Part3() << std::endl;
             break;
         default:
             std::cout << "TILT" << std::endl;

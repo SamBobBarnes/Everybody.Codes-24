@@ -6,7 +6,6 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
-#include "../Helpers.h"
 
 #include "Day2.h"
 #define alert "\033[31;4m"
@@ -17,7 +16,7 @@
 int Day2::Part2() {
     // std::cout << std::endl;
 
-    const std::string filePath{"Day2/input.txt"};
+    const std::string filePath{"Day2/Part2.txt"};
     std::vector<std::string> initialWords{
         "RLZ", "HRHZ", "G", "CT", "DCC", "OW", "LXLQ", "QXS", "ENS", "MGUU", "VUL", "U", "IQSZTWLQLJ", "SRJITALTAM",
         "DR", "CC", "NBLR", "WXVAPEAUJM", "TGSSQZPJNI", "E", "Y", "YEG", "CPJ", "MJ", "XW", "PITF", "UYUCEJBSRS",
@@ -91,13 +90,4 @@ int Day2::Part2() {
     }
 
     return total;
-}
-
-std::string Day2::reverse(std::string word) {
-    std::string reverseWord;
-    for (int i = word.length() - 1; i >= 0; i--) {
-        reverseWord.push_back(word[i]);
-    }
-
-    return reverseWord;
 }

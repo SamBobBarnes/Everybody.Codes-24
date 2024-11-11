@@ -6,13 +6,14 @@
 #define DAY1_H
 
 
-
 class Day1 {
-    public:
-        static int Part1();
-        static int Part2();
-};
+public:
+    static int Part1();
 
+    static int Part2();
+
+    static int Part3();
+};
 
 
 #endif //DAY1_H

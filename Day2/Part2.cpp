@@ -15,7 +15,7 @@
 #define reset "\033[0m"
 
 int Day2::Part2() {
-    std::cout << std::endl;
+    // std::cout << std::endl;
 
     const std::string filePath{"Day2/input.txt"};
     std::vector<std::string> initialWords{
@@ -63,7 +63,7 @@ int Day2::Part2() {
                     printLine += token.substr(0, index) + alert + word + reset + token.substr(index + word.length());
                     pos = index + 1;
                     subtotal++;
-                    std::cout << printLine << std::endl;
+                    // std::cout << printLine << std::endl;
                     printLine = "";
                 }
                 if (subtotal > 0) {
@@ -85,9 +85,9 @@ int Day2::Part2() {
                 }
             }
             total += tokenTotal;
-            std::cout << symbolTextColored << " : " << info << tokenTotal << reset << std::endl;
+            // std::cout << symbolTextColored << " : " << info << tokenTotal << reset << std::endl;
         }
-        std::cout << std::endl;
+        // std::cout << std::endl;
     }
 
     return total;

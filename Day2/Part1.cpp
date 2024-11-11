@@ -21,7 +21,7 @@ int Day2::Part1() {
     for (const auto &token: tokens) {
         for (const auto &word: words) {
             if (token.find(word) != -1) {
-                std::cout << token << " " << word << std::endl;
+                // std::cout << token << " " << word << std::endl;
                 total++;
             }
         }

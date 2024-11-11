@@ -8,6 +8,7 @@ add_executable(Everybody_Codes_24 main.cpp
         Day1/Day1.h
         Day2/Day2.h
         Day2/Part1.cpp
-        Day2/Split.cpp)
+        Day2/Split.cpp
+        Day2/Part2.cpp)
 
 add_subdirectory(tests)

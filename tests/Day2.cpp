@@ -112,3 +112,9 @@ TEST_CASE("FindWordOnGrid finds multiple overlapping words", "[findWordOnGrid]")
 }
 #pragma endregion findWordOnGrid
 
+#pragma region pointsToIntMap
+TEST_CASE("PointsToIntMap maps points accurately to int map", "[pointsToIntMap]") {
+
+}
+#pragma endregion pointsToIntMap
+

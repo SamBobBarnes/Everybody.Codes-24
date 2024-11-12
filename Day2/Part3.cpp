@@ -38,5 +38,15 @@ int Day2::Part3() {
         }
     }
 
+    std::vector<std::vector<bool> > map = createMap(width, height);
+
+    for (const std::string &word: words) {
+        auto result = findWordOnGrid(width, height, reinterpret_cast<char *>(grid), word);
+        if (result.found) {
+            auto tempMap = pointsToIntMap(result.symbolLocations, width, height);
+            map = orMap(map, tempMap, width, height);
+        }
+    }
+    total = countPoints(map, width, height);
     return total;
 }

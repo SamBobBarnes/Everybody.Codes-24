@@ -44,23 +44,27 @@ FindResult Day2::findWordOnGrid(const int w, const int h, char *grid, const std:
                     }
                 }
                 // look down
-                for (int i = 1; i < length; i++) {
-                    if (wordToFind[i] != getChar(w, grid, x, y + i)) break;
+                if (y <= h - length) {
+                    for (int i = 1; i < length; i++) {
+                        if (wordToFind[i] != getChar(w, grid, x, y + i)) break;
 
-                    tempLocations.emplace_back(x, y + i);
-                    if (i == length - 1) {
-                        result.found = true;
-                        result.symbolLocations.append_range(tempLocations);
+                        tempLocations.emplace_back(x, y + i);
+                        if (i == length - 1) {
+                            result.found = true;
+                            result.symbolLocations.append_range(tempLocations);
+                        }
                     }
                 }
                 // look up
-                for (int i = 1; i < length; i++) {
-                    if (wordToFind[i] != getChar(w, grid, x, y - i)) break;
+                if (y >= length - 1) {
+                    for (int i = 1; i < length; i++) {
+                        if (wordToFind[i] != getChar(w, grid, x, y - i)) break;
 
-                    tempLocations.emplace_back(x, y - i);
-                    if (i == length - 1) {
-                        result.found = true;
-                        result.symbolLocations.append_range(tempLocations);
+                        tempLocations.emplace_back(x, y - i);
+                        if (i == length - 1) {
+                            result.found = true;
+                            result.symbolLocations.append_range(tempLocations);
+                        }
                     }
                 }
             }

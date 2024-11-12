@@ -30,6 +30,8 @@ public:
 
     static int countPoints(std::vector<std::vector<bool> > map, int w, int h);
 
+    static std::vector<std::vector<bool> > createMap(int w, int h);
+
 private:
     static std::string reverse(std::string word) {
         std::string reverseWord;

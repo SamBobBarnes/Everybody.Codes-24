@@ -1,8 +1,11 @@
 //
 // Created by sb17057 on 11/11/2024.
 //
+#include <algorithm>
+
 #include "Day2.h"
 #include "FindResult.h"
+#include <set>
 
 char getChar(int h, char *grid, int x, int y) {
     return *((grid + y * h) + x);
@@ -63,6 +66,11 @@ FindResult Day2::findWordOnGrid(const int w, const int h, char *grid, const std:
             }
         }
     }
+
+    //Remove duplicates
+    sort(result.symbolLocations.begin(), result.symbolLocations.end());
+    std::set<Point> s(result.symbolLocations.begin(), result.symbolLocations.end());
+    result.symbolLocations.assign(s.begin(), s.end());
 
     return result;
 }

@@ -14,25 +14,47 @@ FindResult Day2::findWordOnGrid(const int w, const int h, char *grid, const std:
 
     for (int y = 0; y < h; y++) {
         for (int x = 0; x < w; x++) {
-            char current = getChar(h, grid, x, y);
             if (wordToFind[0] == getChar(h, grid, x, y)) {
                 // look to right
                 std::vector<Point> tempLocations{{x, y}};
                 for (int i = 1; i < length; i++) {
-                    if (wordToFind[i] != getChar(h, grid, x + i, y)) break;
+                    int xi = x + i;
+                    if (xi >= w) xi -= w;
+                    if (wordToFind[i] != getChar(h, grid, xi, y)) break;
 
-                    tempLocations.emplace_back(x + i, y);
+                    tempLocations.emplace_back(xi, y);
                     if (i == length - 1) {
                         result.found = true;
                         result.symbolLocations.append_range(tempLocations);
                     }
                 }
-
                 // look to the left
                 for (int i = 1; i < length; i++) {
-                    if (wordToFind[i] != getChar(h, grid, x - i, y)) break;
+                    int xi = x - i;
+                    if (xi < 0) xi += w;
+                    if (wordToFind[i] != getChar(h, grid, xi, y)) break;
 
-                    tempLocations.emplace_back(x - i, y);
+                    tempLocations.emplace_back(xi, y);
+                    if (i == length - 1) {
+                        result.found = true;
+                        result.symbolLocations.append_range(tempLocations);
+                    }
+                }
+                // look down
+                for (int i = 1; i < length; i++) {
+                    if (wordToFind[i] != getChar(h, grid, x, y + i)) break;
+
+                    tempLocations.emplace_back(x, y + i);
+                    if (i == length - 1) {
+                        result.found = true;
+                        result.symbolLocations.append_range(tempLocations);
+                    }
+                }
+                // look up
+                for (int i = 1; i < length; i++) {
+                    if (wordToFind[i] != getChar(h, grid, x, y - i)) break;
+
+                    tempLocations.emplace_back(x, y - i);
                     if (i == length - 1) {
                         result.found = true;
                         result.symbolLocations.append_range(tempLocations);

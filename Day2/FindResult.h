@@ -10,14 +10,17 @@
 #include <vector>
 
 
-struct Point;
-
-struct FindResult {
-    explicit FindResult(const bool found) {
-        this->found = found;
-        this->symbolLocations = {};
+struct Point {
+    Point(const int x, const int y) {
+        this->x = x;
+        this->y = y;
     }
 
+    int x;
+    int y;
+};
+
+struct FindResult {
     explicit FindResult(const bool found, std::vector<Point> symbolLocations) {
         this->found = found;
         this->symbolLocations = std::move(symbolLocations);
@@ -25,20 +28,6 @@ struct FindResult {
 
     bool found;
     std::vector<Point> symbolLocations;
-};
-
-struct Point {
-    Point(const int x, const int y) {
-        this->x = x;
-        this->y = y;
-    }
-
-    bool operator==(const Point &b) const {
-        return x == b.x && y == b.x;
-    }
-
-    int x;
-    int y;
 };
 
 

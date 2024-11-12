@@ -3,6 +3,7 @@
 #include "../Day2/FindResult.h"
 #include "../Day2/Split.cpp"
 #include "../Day2/findWordOnGrid.cpp"
+#include "../Day2/pointsToIntMap.cpp"
 
 #pragma region Stringify
 std::ostream &operator <<(std::ostream &os, Point const &value) {
@@ -46,22 +47,28 @@ TEST_CASE("Split converts string with no spaces into list of single string", "[s
 
 #pragma region findWordOnGrid
 TEST_CASE("FindWordOnGrid does not find word", "[findWordOnGrid]") {
-    char grid[][5]{
-        {'F', 'F', 'E', 'S', 'D'}, {'F', 'F', 'K', 'S', 'D'}, {'F', 'F', 'Q', 'S', 'D'}, {'F', 'I', 'E', 'I', 'D'},
-        {'F', 'F', 'E', 'D', 'D'}
+    char grid[][6]{
+        {'F', 'F', 'E', 'S', 'D', 'R'},
+        {'F', 'F', 'K', 'S', 'D', 'R'},
+        {'F', 'F', 'Q', 'S', 'D', 'R'},
+        {'F', 'I', 'E', 'I', 'D', 'R'},
+        {'F', 'F', 'E', 'D', 'D', 'R'}
     };;
     const std::string wordToFind{"FESSS"};
 
-    FindResult actual = Day2::findWordOnGrid(5, 5, reinterpret_cast<char *>(grid), wordToFind);
+    FindResult actual = Day2::findWordOnGrid(6, 5, reinterpret_cast<char *>(grid), wordToFind);
 
     REQUIRE(actual.found == false);
     REQUIRE_THAT(actual.symbolLocations, Catch::Matchers::IsEmpty());
 }
 
 TEST_CASE("FindWordOnGrid finds single word", "[findWordOnGrid]") {
-    char grid[][5]{
-        {'F', 'F', 'E', 'S', 'D'}, {'F', 'F', 'K', 'S', 'D'}, {'F', 'F', 'Q', 'S', 'D'}, {'F', 'I', 'E', 'I', 'D'},
-        {'F', 'F', 'E', 'D', 'D'}
+    char grid[][6]{
+        {'F', 'F', 'E', 'S', 'D', 'R'},
+        {'F', 'F', 'K', 'S', 'D', 'R'},
+        {'F', 'F', 'Q', 'S', 'D', 'R'},
+        {'F', 'I', 'E', 'I', 'D', 'R'},
+        {'F', 'F', 'E', 'D', 'D', 'R'}
     };
     std::string testName;
     std::string wordToFind;
@@ -72,8 +79,8 @@ TEST_CASE("FindWordOnGrid finds single word", "[findWordOnGrid]") {
                                                              std::make_tuple("Right to Left","SEF",0),
                                                              std::make_tuple("Down","SID",1),
                                                              std::make_tuple("Up","DIS",1),
-                                                             std::make_tuple("Left Wrap","DFI",2),
-                                                             std::make_tuple("Right Wrap","IFD",2)
+                                                             std::make_tuple("Left Wrap","DRFI",2),
+                                                             std::make_tuple("Right Wrap","IFRD",2)
                                                              }));
     SECTION(testName) {
         std::vector<Point> expected;
@@ -82,14 +89,14 @@ TEST_CASE("FindWordOnGrid finds single word", "[findWordOnGrid]") {
                 break;
             case 1: expected = {{3, 2}, {3, 3}, {3, 4}};
                 break;
-            case 2: expected = {{4, 3}, {0, 3}, {1, 3}};
+            case 2: expected = {{4, 3}, {5, 3}, {0, 3}, {1, 3}};
                 break;
             default:
                 std::cout << "TILT" << std::endl;
                 Catch::throw_test_failure_exception();
         }
 
-        FindResult actual = Day2::findWordOnGrid(5, 5, reinterpret_cast<char *>(grid), wordToFind);
+        FindResult actual = Day2::findWordOnGrid(6, 5, reinterpret_cast<char *>(grid), wordToFind);
 
         REQUIRE(actual.found == true);
         REQUIRE_THAT(actual.symbolLocations, Catch::Matchers::UnorderedRangeEquals(expected));
@@ -97,15 +104,18 @@ TEST_CASE("FindWordOnGrid finds single word", "[findWordOnGrid]") {
 }
 
 TEST_CASE("FindWordOnGrid finds multiple overlapping words", "[findWordOnGrid]") {
-    char grid[][5]{
-        {'F', 'F', 'E', 'S', 'D'}, {'F', 'F', 'K', 'S', 'D'}, {'F', 'F', 'Q', 'S', 'D'}, {'F', 'I', 'E', 'I', 'F'},
-        {'F', 'F', 'E', 'D', 'D'}
+    char grid[][6]{
+        {'F', 'F', 'E', 'S', 'D', 'R'},
+        {'F', 'F', 'K', 'S', 'D', 'R'},
+        {'F', 'F', 'Q', 'S', 'D', 'R'},
+        {'F', 'I', 'E', 'I', 'F', 'F'},
+        {'F', 'F', 'E', 'D', 'D', 'R'}
     };
     const std::string wordToFind{"FF"};
 
-    std::vector<Point> expected{{0, 0}, {1, 0}, {0, 1}, {1, 1}, {0, 2}, {1, 2}, {0, 3}, {4, 3}, {0, 4}, {1, 4}};
+    std::vector<Point> expected{{0, 0}, {1, 0}, {0, 1}, {1, 1}, {0, 2}, {1, 2}, {0, 3}, {4, 3}, {5, 3}, {0, 4}, {1, 4}};
 
-    FindResult actual = Day2::findWordOnGrid(5, 5, reinterpret_cast<char *>(grid), wordToFind);
+    FindResult actual = Day2::findWordOnGrid(6, 5, reinterpret_cast<char *>(grid), wordToFind);
 
     REQUIRE(actual.found == true);
     REQUIRE_THAT(actual.symbolLocations, Catch::Matchers::UnorderedRangeEquals(expected));
@@ -114,7 +124,48 @@ TEST_CASE("FindWordOnGrid finds multiple overlapping words", "[findWordOnGrid]")
 
 #pragma region pointsToIntMap
 TEST_CASE("PointsToIntMap maps points accurately to int map", "[pointsToIntMap]") {
+    std::vector<Point> input{{0, 0}, {1, 0}, {0, 1}, {1, 1}, {0, 2}, {1, 2}, {0, 3}, {4, 3}, {0, 4}, {1, 4}};
+    std::vector<std::vector<bool> > expected = {
+        {true, true, true, true, true},
+        {true, true, true, false, true},
+        {false, false, false, false, false},
+        {false, false, false, false, false},
+        {false, false, false, true, false},
+    };
 
+    std::vector<std::vector<bool> > actual = Day2::pointsToIntMap(input, 5, 5);
+
+    REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
 }
 #pragma endregion pointsToIntMap
+
+#pragma region orMap
+TEST_CASE("OrMap adds two maps together", "[orMap]") {
+    std::vector<std::vector<bool> > map1 = {
+        {true, true, true, true, true},
+        {true, true, true, false, true},
+        {false, false, false, false, false},
+        {false, false, false, false, false},
+        {false, false, true, true, false},
+    };
+    std::vector<std::vector<bool> > map2 = {
+        {true, true, true, true, true},
+        {true, true, true, false, true},
+        {false, false, false, false, false},
+        {false, false, false, false, false},
+        {false, true, false, true, false},
+    };
+    std::vector<std::vector<bool> > expected = {
+        {true, true, true, true, true},
+        {true, true, true, false, true},
+        {false, false, false, false, false},
+        {false, false, false, false, false},
+        {false, true, true, true, false},
+    };
+
+    std::vector<std::vector<bool> > actual = Day2::orMap(map1, map2, 5, 5);
+
+    REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
+}
+#pragma endregion orMap
 

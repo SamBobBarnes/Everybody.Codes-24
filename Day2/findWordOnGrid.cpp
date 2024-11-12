@@ -7,8 +7,8 @@
 #include "FindResult.h"
 #include <set>
 
-char getChar(int h, char *grid, int x, int y) {
-    return *((grid + y * h) + x);
+char getChar(int width, char *grid, int x, int y) {
+    return *((grid + y * width) + x);
 }
 
 FindResult Day2::findWordOnGrid(const int w, const int h, char *grid, const std::string &wordToFind) {
@@ -17,13 +17,13 @@ FindResult Day2::findWordOnGrid(const int w, const int h, char *grid, const std:
 
     for (int y = 0; y < h; y++) {
         for (int x = 0; x < w; x++) {
-            if (wordToFind[0] == getChar(h, grid, x, y)) {
+            if (wordToFind[0] == getChar(w, grid, x, y)) {
                 // look to right
                 std::vector<Point> tempLocations{{x, y}};
                 for (int i = 1; i < length; i++) {
                     int xi = x + i;
                     if (xi >= w) xi -= w;
-                    if (wordToFind[i] != getChar(h, grid, xi, y)) break;
+                    if (wordToFind[i] != getChar(w, grid, xi, y)) break;
 
                     tempLocations.emplace_back(xi, y);
                     if (i == length - 1) {
@@ -35,7 +35,7 @@ FindResult Day2::findWordOnGrid(const int w, const int h, char *grid, const std:
                 for (int i = 1; i < length; i++) {
                     int xi = x - i;
                     if (xi < 0) xi += w;
-                    if (wordToFind[i] != getChar(h, grid, xi, y)) break;
+                    if (wordToFind[i] != getChar(w, grid, xi, y)) break;
 
                     tempLocations.emplace_back(xi, y);
                     if (i == length - 1) {
@@ -45,7 +45,7 @@ FindResult Day2::findWordOnGrid(const int w, const int h, char *grid, const std:
                 }
                 // look down
                 for (int i = 1; i < length; i++) {
-                    if (wordToFind[i] != getChar(h, grid, x, y + i)) break;
+                    if (wordToFind[i] != getChar(w, grid, x, y + i)) break;
 
                     tempLocations.emplace_back(x, y + i);
                     if (i == length - 1) {
@@ -55,7 +55,7 @@ FindResult Day2::findWordOnGrid(const int w, const int h, char *grid, const std:
                 }
                 // look up
                 for (int i = 1; i < length; i++) {
-                    if (wordToFind[i] != getChar(h, grid, x, y - i)) break;
+                    if (wordToFind[i] != getChar(w, grid, x, y - i)) break;
 
                     tempLocations.emplace_back(x, y - i);
                     if (i == length - 1) {

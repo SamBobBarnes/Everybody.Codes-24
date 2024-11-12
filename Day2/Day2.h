@@ -23,7 +23,12 @@ public:
 
     static FindResult findWordOnGrid(int w, int h, char *grid, const std::string &wordToFind);
 
-    static std::vector<std::vector<bool> > pointsToIntMap(std::vector<Point> points, int w, int h);
+    static std::vector<std::vector<bool> > pointsToIntMap(const std::vector<Point> &points, int w, int h);
+
+    static std::vector<std::vector<bool> > orMap(std::vector<std::vector<bool> > map1,
+                                                 std::vector<std::vector<bool> > map2, int w, int h);
+
+    static int countPoints(std::vector<std::vector<bool> > map, int w, int h);
 
 private:
     static std::string reverse(std::string word) {

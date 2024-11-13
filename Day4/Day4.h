@@ -15,5 +15,14 @@ public:
     static int Part2();
 
     static int Part3();
+
+private:
+    static std::string leftpad(const std::string &str, int width, char fill = ' ') {
+        if (str.length() >= width) {
+            return str;
+        }
+
+        return std::string(width - str.length(), fill) + str;
+    }
 };
 #endif //DAY4_H

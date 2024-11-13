@@ -14,6 +14,9 @@ add_executable(Everybody_Codes_24 main.cpp
         Day2/Part3.cpp
         Day2/findWordOnGrid.cpp
         Day2/FindResult.h
-        Day2/PointsToIntMap.cpp)
+        Day2/PointsToIntMap.cpp
+        Day3/Day3.h
+        Day3/Part1.cpp
+        Day3/Point.h)
 
 add_subdirectory(tests)

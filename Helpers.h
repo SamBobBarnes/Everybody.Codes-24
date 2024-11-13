@@ -36,6 +36,23 @@ public:
         return cCurrentPath;
     }
 
+    static void colorReference() {
+        std::cout << "\033[31m" << "Red" << "\033[0m" << " 31" << std::endl;
+        std::cout << "\033[91m" << "Bright Red" << "\033[0m" << " 91" << std::endl;
+        std::cout << "\033[35m" << "Magenta" << "\033[0m" << " 35" << std::endl;
+        std::cout << "\033[95m" << "Bright Magenta" << "\033[0m" << " 95" << std::endl;
+        std::cout << "\033[32m" << "Green" << "\033[0m" << " 32" << std::endl;
+        std::cout << "\033[92m" << "Bright Green" << "\033[0m" << " 92" << std::endl;
+        std::cout << "\033[33m" << "Yellow" << "\033[0m" << " 33" << std::endl;
+        std::cout << "\033[93m" << "Bright Yellow" << "\033[0m" << " 93" << std::endl;
+        std::cout << "\033[36m" << "Cyan" << "\033[0m" << " 36" << std::endl;
+        std::cout << "\033[96m" << "Bright Cyan" << "\033[0m" << " 96" << std::endl;
+        std::cout << "\033[34m" << "Blue" << "\033[0m" << " 34" << std::endl;
+        std::cout << "\033[94m" << "Bright Blue" << "\033[0m" << " 94" << std::endl;
+        std::cout << "\033[37m" << "White" << "\033[0m" << " 37" << std::endl;
+        std::cout << "\033[97m" << "Bright White" << "\033[0m" << " 97" << std::endl;
+    }
+
     static std::vector<std::string> readFile(const std::string &path, bool debug = false) {
         std::vector<std::string> lines{};
 #ifdef _WIN32

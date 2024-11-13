@@ -3,6 +3,7 @@
 #include "Helpers.h"
 #include "Day1/Day1.h"
 #include "Day2/Day2.h"
+#include "Day3/Day3.h"
 
 
 int main() {
@@ -14,7 +15,10 @@ int main() {
 #endif
     std::cout << std::endl << std::endl;
     std::cout << "Current dir: " << Helpers::pwd() << std::endl;
-    switch (2) {
+
+    // Helpers::colorReference();
+
+    switch (3) {
         case 1:
             std::cout << "Day 1 - Part 1: " << Day1::Part1() << std::endl;
             std::cout << "Day 1 - Part 2: " << Day1::Part2() << std::endl;
@@ -23,6 +27,11 @@ int main() {
             std::cout << "Day 2 - Part 1: " << Day2::Part1() << std::endl;
             std::cout << "Day 2 - Part 2: " << Day2::Part2() << std::endl;
             std::cout << "Day 2 - Part 3: " << Day2::Part3() << std::endl;
+            break;
+        case 3:
+            std::cout << "Day 3 - Part 1: " << Day3::Part1() << std::endl;
+            std::cout << "Day 3 - Part 2: " << Day3::Part2() << std::endl;
+            std::cout << "Day 3 - Part 3: " << Day3::Part3() << std::endl;
             break;
         default:
             std::cout << "TILT" << std::endl;

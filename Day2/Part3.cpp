@@ -7,7 +7,7 @@
 int Day2::Part3() {
     int total = 0;
     const std::string filePath{"Day2/Part3.txt"};
-    std::vector<std::string> initialWords{
+    std::vector<std::string> words{
         "VUU", "QGW", "NG", "VNPCCPZCEJ", "MX", "XH", "BTYD", "SHLX", "XI", "ABTW", "EQJNTYVVXM", "LOL", "MCT", "HV",
         "BUURUPZFKP", "K", "KUT", "LX", "KGDT", "G", "JDQL", "R", "NV", "HUCP", "XOGC", "DT", "XSO", "ZMEJ", "B",
         "MPWFMMMKAI", "URP", "JGZECVSPMW", "EYED", "OO", "HK", "ATOOEYDSOQ", "H", "LATL", "ASUC", "QJQAEVGUDR", "QN",
@@ -18,14 +18,6 @@ int Day2::Part3() {
         "UTJO"
     };
 
-    std::vector<std::string> words{};
-    for (const auto &word: initialWords) {
-        words.push_back(word);
-        if (word.length() > 1) {
-            std::string reverseWord = reverse(word);
-            if (word != reverseWord) words.push_back(reverseWord);
-        }
-    }
     std::vector<std::string> lines = Helpers::readFile(filePath);
     const int width = 200;
     const int height = 107;

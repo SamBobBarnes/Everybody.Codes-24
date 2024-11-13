@@ -18,55 +18,72 @@ FindResult Day2::findWordOnGrid(const int w, const int h, char *grid, const std:
 
                 if (length == 1) {
                     result.found = true;
-                    result.symbolLocations.append_range(tempLocations);
+                    result.symbolLocations.emplace_back(x, y);
                 }
 
                 // look to right
-
                 for (int i = 1; i < length; i++) {
                     int xi = x + i;
                     if (xi >= w) xi -= w;
-                    if (wordToFind[i] != getChar(w, grid, xi, y)) break;
+                    if (wordToFind[i] != getChar(w, grid, xi, y)) {
+                        tempLocations = {{x, y}};
+                        break;
+                    }
 
                     tempLocations.emplace_back(xi, y);
                     if (i == length - 1) {
                         result.found = true;
                         result.symbolLocations.append_range(tempLocations);
+                        tempLocations = {{x, y}};
                     }
                 }
+
                 // look to the left
                 for (int i = 1; i < length; i++) {
                     int xi = x - i;
                     if (xi < 0) xi += w;
-                    if (wordToFind[i] != getChar(w, grid, xi, y)) break;
+                    if (wordToFind[i] != getChar(w, grid, xi, y)) {
+                        tempLocations = {{x, y}};
+                        break;
+                    }
 
                     tempLocations.emplace_back(xi, y);
                     if (i == length - 1) {
                         result.found = true;
                         result.symbolLocations.append_range(tempLocations);
+                        tempLocations = {{x, y}};
                     }
                 }
+
                 // look down
                 if (y <= h - length) {
                     for (int i = 1; i < length; i++) {
-                        if (wordToFind[i] != getChar(w, grid, x, y + i)) break;
+                        if (wordToFind[i] != getChar(w, grid, x, y + i)) {
+                            tempLocations = {{x, y}};
+                            break;
+                        }
 
                         tempLocations.emplace_back(x, y + i);
                         if (i == length - 1) {
                             result.found = true;
                             result.symbolLocations.append_range(tempLocations);
+                            tempLocations = {{x, y}};
                         }
                     }
                 }
                 // look up
                 if (y >= length - 1) {
                     for (int i = 1; i < length; i++) {
-                        if (wordToFind[i] != getChar(w, grid, x, y - i)) break;
+                        if (wordToFind[i] != getChar(w, grid, x, y - i)) {
+                            tempLocations = {{x, y}};
+                            break;
+                        }
 
                         tempLocations.emplace_back(x, y - i);
                         if (i == length - 1) {
                             result.found = true;
                             result.symbolLocations.append_range(tempLocations);
+                            tempLocations = {{x, y}};
                         }
                     }
                 }

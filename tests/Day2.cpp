@@ -156,6 +156,23 @@ TEST_CASE("FindWordOnGrid finds single word", "[findWordOnGrid]") {
     }
 }
 
+TEST_CASE("FindWordOnGrid doesnt find sneaky letters", "[findWordOnGrid]") {
+    char grid[][6]{
+        {'F', 'F', 'E', 'S', 'D', 'R'},
+        {'F', 'F', 'K', 'S', 'S', 'R'},
+        {'F', 'F', 'Q', 'S', 'D', 'R'},
+        {'F', 'I', 'E', 'I', 'D', 'R'},
+        {'F', 'F', 'E', 'D', 'D', 'R'}
+    };
+    std::string wordToFind = "SSI";
+    std::vector<Point> expected{{3, 1}, {3, 2}, {3, 3}};
+
+    FindResult actual = Day2::findWordOnGrid(6, 5, reinterpret_cast<char *>(grid), wordToFind);
+
+    REQUIRE(actual.found == true);
+    REQUIRE_THAT(actual.symbolLocations, Catch::Matchers::UnorderedRangeEquals(expected));
+}
+
 TEST_CASE("FindWordOnGrid finds multiple overlapping words", "[findWordOnGrid]") {
     char grid[][6]{
         {'F', 'F', 'E', 'S', 'D', 'R'},

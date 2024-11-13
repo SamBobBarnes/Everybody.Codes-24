@@ -17,7 +17,7 @@ class Day3 {
 public:
     static int Part1();
 
-    static int Part2() { return 0; }
+    static int Part2();
 
     static int Part3() { return 0; }
 

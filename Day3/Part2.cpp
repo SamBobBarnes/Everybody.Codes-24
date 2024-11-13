@@ -5,9 +5,9 @@
 #include "Day3.h"
 #include "../Point.h"
 
-int Day3::Part1() {
+int Day3::Part2() {
     cout << endl;
-    auto lines = Helpers::readFile("Day3/Part1.txt");
+    auto lines = Helpers::readFile("Day3/Part2.txt");
     int height = lines.size();
     int width = lines[0].length();
 
@@ -31,7 +31,7 @@ int Day3::Part1() {
         currentDepth++;
         holesToDig.clear();
 
-        // PrintMap(&map);
+        PrintMap(&map);
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {

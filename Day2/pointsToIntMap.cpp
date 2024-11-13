@@ -1,5 +1,4 @@
 #include <ranges>
-#include <utility>
 
 #include "Day2.h"
 //

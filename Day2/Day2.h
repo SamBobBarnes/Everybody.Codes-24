@@ -11,6 +11,11 @@
 #ifndef DAY2_H
 #define DAY2_H
 
+#define alert "\033[31;4m"
+#define info "\033[34m"
+#define underline "\003[4m"
+#define reset "\033[0m"
+
 class Day2 {
 public:
     static int Part1();
@@ -31,6 +36,8 @@ public:
     static int countPoints(std::vector<std::vector<bool> > map, int w, int h);
 
     static std::vector<std::vector<bool> > createMap(int w, int h);
+
+    static void printMap(const std::vector<std::vector<bool> > *map, char *grid);
 
 private:
     static std::string reverse(std::string word) {

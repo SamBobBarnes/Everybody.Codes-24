@@ -49,3 +49,18 @@ std::vector<std::vector<bool> > Day2::createMap(int w, int h) {
 
     return map;
 }
+
+void Day2::printMap(const std::vector<std::vector<bool> > *map, char *grid) {
+    int width = map->size();
+    int height = map[0][0].size();
+
+    std::cout << std::endl;
+    for (int y: std::views::iota(0, height)) {
+        for (int x: std::views::iota(0, width)) {
+            if (map[0][x][y]) std::cout << alert;
+            else std::cout << reset;
+            std::cout << getChar(width, grid, x, y);
+        }
+        std::cout << std::endl;
+    }
+}

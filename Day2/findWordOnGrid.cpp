@@ -14,8 +14,15 @@ FindResult Day2::findWordOnGrid(const int w, const int h, char *grid, const std:
     for (int y = 0; y < h; y++) {
         for (int x = 0; x < w; x++) {
             if (wordToFind[0] == getChar(w, grid, x, y)) {
-                // look to right
                 std::vector<Point> tempLocations{{x, y}};
+
+                if (length == 1) {
+                    result.found = true;
+                    result.symbolLocations.append_range(tempLocations);
+                }
+
+                // look to right
+
                 for (int i = 1; i < length; i++) {
                     int xi = x + i;
                     if (xi >= w) xi -= w;

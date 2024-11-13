@@ -7,10 +7,6 @@
 #include "FindResult.h"
 #include <set>
 
-char getChar(int width, char *grid, int x, int y) {
-    return *((grid + y * width) + x);
-}
-
 FindResult Day2::findWordOnGrid(const int w, const int h, char *grid, const std::string &wordToFind) {
     FindResult result{false, {}};
     int length = wordToFind.length();

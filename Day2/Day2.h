@@ -48,5 +48,9 @@ private:
 
         return reverseWord;
     }
+
+    static char getChar(int width, const char *grid, int x, int y) {
+        return *((grid + y * width) + x);
+    }
 };
 #endif //DAY2_H

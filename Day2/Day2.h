@@ -11,11 +11,6 @@
 #ifndef DAY2_H
 #define DAY2_H
 
-#define alert "\033[31;4m"
-#define info "\033[34m"
-#define underline "\003[4m"
-#define reset "\033[0m"
-
 class Day2 {
 public:
     static int Part1();

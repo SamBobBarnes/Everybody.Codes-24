@@ -57,8 +57,8 @@ void Day2::printMap(const std::vector<std::vector<bool> > *map, char *grid) {
     std::cout << std::endl;
     for (int y: std::views::iota(0, height)) {
         for (int x: std::views::iota(0, width)) {
-            if (map[0][x][y]) std::cout << alert;
-            else std::cout << reset;
+            if (map[0][x][y]) std::cout << "\033[31;4m";
+            else std::cout << "\033[0m";
             std::cout << getChar(width, grid, x, y);
         }
         std::cout << std::endl;

@@ -47,6 +47,9 @@ int Day2::Part3() {
             map = orMap(map, tempMap, width, height);
         }
     }
+
+    printMap(&map, reinterpret_cast<char *>(grid));
+
     total = countPoints(map, width, height);
     return total;
 }

@@ -9,10 +9,6 @@
 #include <cmath>
 
 #include "Day2.h"
-#define alert "\033[31;4m"
-#define info "\033[34m"
-#define underline "\003[4m"
-#define reset "\033[0m"
 
 int Day2::Part2() {
     // std::cout << std::endl;

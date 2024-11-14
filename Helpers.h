@@ -53,6 +53,11 @@ public:
         std::cout << "\033[97m" << "Bright White" << "\033[0m" << " 97" << std::endl;
     }
 
+    static std::vector<std::string> readFile(const int day, const int part) {
+        std::string path = "Day" + std::to_string(day) + "/Part" + std::to_string(part) + ".txt";
+        return readFile(path);
+    }
+
     static std::vector<std::string> readFile(const std::string &path, bool debug = false) {
         std::vector<std::string> lines{};
 #ifdef _WIN32
@@ -72,6 +77,22 @@ public:
         } else std::cout << "Unable to open file";
 
         return lines;
+    }
+
+    static std::vector<std::string> split(std::string input, char on = ' ') {
+        std::string temp = std::move(input);
+        std::vector<std::string> result{};
+        bool finished{false};
+
+        while (!finished) {
+            int spaceIndex = temp.find(on);
+            if (spaceIndex == -1) finished = true;
+            std::string token = temp.substr(0, spaceIndex);
+            if (!token.empty()) result.push_back(token);
+            temp = temp.substr(spaceIndex + 1);
+        }
+
+        return result;
     }
 };
 

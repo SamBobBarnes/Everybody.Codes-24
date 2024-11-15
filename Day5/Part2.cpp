@@ -74,7 +74,7 @@ long long Day5::Part2() {
         // printDance(&knights, maxHeight);
 
         if (cries.Collect(cry, i)) {
-            cout << checkAmount << " iteration of " << cry << " found on iteration " << i << endl;
+            // cout << checkAmount << " iteration of " << cry << " found on iteration " << i << endl;
             finalNumber = (long long) cry * (long long) (i + 1);
             break;
         }

@@ -15,7 +15,7 @@ public:
 
     static long long Part2();
 
-    static int Part3();
+    static long long Part3();
 
     static void printDance(vector<vector<int> > *knights, int height) {
         int width = knights[0].size();

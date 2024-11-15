@@ -9,7 +9,7 @@
 #include "Bucket.h"
 
 long long Day5::Part2() {
-    cout << endl;
+    // cout << endl;
     auto lines = Helpers::readFile(5, 2);
     vector<vector<int> > tempKnights{};
     vector<vector<int> > knights{};
@@ -45,7 +45,7 @@ long long Day5::Part2() {
         int clapperValue = knights[clapperPos.x][clapperPos.y];
         int nextColLength = knights[nextCol].size();
         bool rightSide = nextColLength > 1 ? clapperValue / nextColLength % 2 : !(clapperValue % 2);
-        int landIndex = ((clapperValue % nextColLength) - 1) + (rightSide ? nextColLength - 1 : 0);
+        int landIndex = abs(clapperValue % nextColLength - 1 - (rightSide ? nextColLength - 2 : 0));
         if (landIndex < 0) landIndex = nextColLength - 1;
 
         Point finalPlacement = {nextCol, landIndex + (rightSide ? 1 : 0)};

@@ -8,7 +8,7 @@
 #include "../Point.h"
 #include "Bucket.h"
 
-int Day5::Part2() {
+long long Day5::Part2() {
     cout << endl;
     auto lines = Helpers::readFile(5, 2);
     vector<vector<int> > tempKnights{};
@@ -32,9 +32,11 @@ int Day5::Part2() {
     int rounds{1000000000};
     int currentCol{0};
     int maxHeight = knights[0].size();
-    int finalNumber{0};
-    Bucket cries{};
-    printDance(&knights, maxHeight);
+    int intWidth = knights[0][0] > 10 ? 2 : 1;
+    long long finalNumber{0};
+    int checkAmount = 2024;
+    Bucket cries{checkAmount};
+    // printDance(&knights, maxHeight);
 
     for (int i = 0; i < rounds; i++) {
         int nextCol = currentCol + 1 == knights.size() ? 0 : currentCol + 1;
@@ -42,15 +44,15 @@ int Day5::Part2() {
         Point clapperPos{currentCol, 0};
         int clapperValue = knights[clapperPos.x][clapperPos.y];
         int nextColLength = knights[nextCol].size();
-        bool rightSide = clapperValue / (nextColLength + 1) % 2;
+        bool rightSide = nextColLength > 1 ? clapperValue / nextColLength % 2 : !(clapperValue % 2);
         int landIndex = ((clapperValue % nextColLength) - 1) + (rightSide ? nextColLength - 1 : 0);
         if (landIndex < 0) landIndex = nextColLength - 1;
 
         Point finalPlacement = {nextCol, landIndex + (rightSide ? 1 : 0)};
 
 
-        cout << endl << "Knight " << clapperValue << " moves from {" << clapperPos.x << "," << clapperPos.y << "} to {"
-                << finalPlacement.x << "," << finalPlacement.y << "}. And all the knights cry """;
+        // cout << endl << "Knight " << clapperValue << " moves from {" << clapperPos.x << "," << clapperPos.y << "} to {"
+        //         << finalPlacement.x << "," << finalPlacement.y << "}. And all the knights cry """;
 
 
         if (finalPlacement.y == nextColLength) knights[nextCol].push_back(clapperValue);
@@ -61,25 +63,26 @@ int Day5::Part2() {
         int index = knights.size() - 1;
         for (const auto &col: knights) {
             if (col.size() > maxHeight) maxHeight = col.size();
-            int power = pow(10, index);
+            int base{10};
+            if (intWidth > 1) base = 100;
+            int power = pow(base, index);
             cry += col[0] * power;
             index--;
         }
 
-        cout << cry << "!""" << endl;
-        printDance(&knights, maxHeight);
+        // cout << cry << "!""" << endl;
+        // printDance(&knights, maxHeight);
 
-        // if (cries.Collect(cry, i)) {
-        //     cout << "first duplicate found at line " << i << endl;
-        //     break;
-        // }
-
-        // cries.push_back(finalNumber);
+        if (cries.Collect(cry, i)) {
+            cout << checkAmount << " iteration of " << cry << " found on iteration " << i << endl;
+            finalNumber = (long long) cry * (long long) (i + 1);
+            break;
+        }
 
         currentCol = nextCol;
     }
 
-    cries.PrintData();
+    // cries.PrintData();
 
     return finalNumber;
 }

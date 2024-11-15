@@ -9,8 +9,13 @@
 class Bucket {
 private:
     std::map<int, tuple<int, vector<int> > > collection{};
+    int checkFor{};
 
 public:
+    explicit Bucket(int checkAmount) {
+        checkFor = checkAmount;
+    }
+
     bool Collect(const int cry, const int i) {
         if (collection.contains(cry)) {
             get<0>(collection[cry])++;
@@ -18,7 +23,7 @@ public:
         } else {
             collection.insert({cry, {1, {i}}});
         }
-        return get<0>(collection[cry]) == 50;
+        return get<0>(collection[cry]) == checkFor;
     }
 
     void PrintData() {

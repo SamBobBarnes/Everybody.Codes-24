@@ -23,7 +23,7 @@ public:
 
     static void SetDepth(Node *root, int depth = 0);
 
-    static void NewNode(Node *root, vector<string> *lines);
+    static void NewNode(Node *root, const vector<string> &lines);
 };
 
 inline void Day6::PrintNode(const Node *root, const int depth) {

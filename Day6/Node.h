@@ -14,7 +14,7 @@ struct Node {
         this->label = std::move(label);
     }
 
-    explicit Node(std::string label, Node *head, int depth) {
+    explicit Node(std::string label, Node *head, const int depth) {
         this->label = std::move(label);
         this->head = head;
         this->depth = depth;

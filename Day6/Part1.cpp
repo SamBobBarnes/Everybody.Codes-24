@@ -8,14 +8,14 @@
 #include "Node.h"
 #include "../Helpers.h"
 
-vector<string> findLine(vector<string> *lines, const string &key) {
-    for (auto line: &lines) {
+vector<string> findLine(const vector<string> &lines, const string &key) {
+    for (const auto &line: lines) {
         if (key == Helpers::split(line, ':')[0]) return Helpers::split(Helpers::split(line, ':')[1], ',');
     }
     return {};
 }
 
-void Day6::NewNode(Node *root, vector<string> *lines) {
+void Day6::NewNode(Node *root, const vector<string> &lines) {
     vector<string> q = findLine(lines, root->label);
     for (const string &childLabel: q) {
         Node *child = root->AddTail(childLabel);
@@ -26,7 +26,7 @@ void Day6::NewNode(Node *root, vector<string> *lines) {
 string Day6::Part1() {
     auto lines = Helpers::readFile(6, 1);
     Node root{"RR"};
-    NewNode(&root, &lines);
+    NewNode(&root, lines);
 
     PrintNode(&root);
 

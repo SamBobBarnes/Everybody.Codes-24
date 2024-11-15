@@ -22,8 +22,9 @@ public:
     static void PrintNode(const Node *root, int depth = 0);
 
     static void SetDepth(Node *root, int depth = 0);
-};
 
+    static void NewNode(Node *root, vector<string> *lines);
+};
 
 inline void Day6::PrintNode(const Node *root, const int depth) {
     string depthString;
@@ -42,7 +43,7 @@ inline void Day6::PrintNode(const Node *root, const int depth) {
 inline void Day6::SetDepth(Node *root, const int depth) {
     root->depth = depth;
     if (!root->apple) {
-        for (auto &child: root->tails) {
+        for (const auto child: root->tails) {
             PrintNode(child, depth + 1);
         }
     }

@@ -29,6 +29,11 @@ add_executable(Everybody_Codes_24 main.cpp
         Day5/Part2.cpp
         Day5/Part3.cpp
         Day5/Bucket.h
+        Day6/Day6.h
+        Day6/Part1.cpp
+        Day6/Part2.cpp
+        Day6/Part3.cpp
+        Day6/Node.h
 )
 
 add_subdirectory(tests)

@@ -16,9 +16,9 @@ class Day6 {
 public:
     static string Part1();
 
-    static int Part2();
+    static string Part2();
 
-    static int Part3();
+    static string Part3();
 
     static void PrintNode(Node *root, int depth = 0);
 
@@ -38,7 +38,7 @@ private:
 inline void Day6::FindApples(Node *root, vector<string> *paths, const string &currentPath) {
     if (root->apple) paths->push_back(currentPath);
     for (auto &child: root->tails) {
-        FindApples(&child, paths, currentPath + child.label);
+        FindApples(&child, paths, currentPath + child.label.substr(0, 1));
     }
 }
 

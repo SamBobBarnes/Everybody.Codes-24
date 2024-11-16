@@ -7,8 +7,8 @@
 #include "Day6.h"
 #include "../Helpers.h"
 
-int Day6::Part3() {
+string Day6::Part3() {
     auto lines = Helpers::readFile(6, 3);
 
-    return 0;
+    return "0";
 }

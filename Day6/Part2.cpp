@@ -5,7 +5,28 @@
 #include "Day6.h"
 #include "../Helpers.h"
 
-int Day6::Part2() {
+string Day6::Part2() {
     auto lines = Helpers::readFile(6, 2);
-    return 0;
+    Node root{"RR"};
+    NewNode(&root, lines);
+
+    // PrintNode(&root);
+
+    string pathToApple;
+    vector<string> pathsToApples;
+    map<int, vector<string *> > pathLengths;
+
+    FindApples(&root, &pathsToApples, "R");
+
+    for (string &path: pathsToApples) {
+        int length = path.length();
+        if (pathLengths.contains(length)) pathLengths[length].push_back(&path);
+        else pathLengths.insert({length, {&path}});
+    }
+
+    for (auto &length: pathLengths) {
+        if (length.second.size() == 1) pathToApple = *length.second.front();
+    }
+
+    return pathToApple;
 }

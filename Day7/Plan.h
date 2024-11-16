@@ -22,11 +22,16 @@ struct Plan {
     std::string label{};
     std::vector<char> steps{};
     int currentIndex{-1};
+    int total{0};
 
     char next() {
         currentIndex++;
         if (currentIndex == steps.size()) currentIndex = 0;
         return steps[currentIndex];
+    }
+
+    bool operator<(const Plan &other) const {
+        return total > other.total;
     }
 };
 

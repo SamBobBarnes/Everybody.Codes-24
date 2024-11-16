@@ -18,11 +18,13 @@ struct Node {
         this->label = std::move(label);
         this->head = head;
         this->depth = depth;
-        if (label == "@") apple = true;
+        if (this->label == "@") {
+            apple = true;
+        }
     }
 
     Node *head{};
-    std::vector<Node *> tails{};
+    std::vector<Node> tails{};
     bool apple{false};
     std::string label;
     int depth{};
@@ -32,8 +34,9 @@ struct Node {
     }
 
     Node *AddTail(const std::string &label) {
-        tails.emplace_back(label, this, depth + 1);
-        return tails.back();
+        Node child{label, this, depth + 1};
+        tails.push_back(child);
+        return &tails.back();
     }
 };
 

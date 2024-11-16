@@ -8,56 +8,29 @@
 #include "Node.h"
 #include "../Helpers.h"
 
-vector<string> findLine(const vector<string> &lines, const string &key) {
-    for (const auto &line: lines) {
-        if (key == Helpers::split(line, ':')[0]) return Helpers::split(Helpers::split(line, ':')[1], ',');
-    }
-    return {};
-}
-
-void Day6::NewNode(Node *root, const vector<string> &lines) {
-    vector<string> q = findLine(lines, root->label);
-    for (const string &childLabel: q) {
-        Node *child = root->AddTail(childLabel);
-        NewNode(child, lines);
-    }
-}
 
 string Day6::Part1() {
     auto lines = Helpers::readFile(6, 1);
     Node root{"RR"};
     NewNode(&root, lines);
 
-    PrintNode(&root);
-
-
-    // map<int, int> counts{};
-    // for (auto &apple: apples) {
-    //     if (counts[apple->depth]) counts[apple->depth]++;
-    //     else counts.insert({apple->depth, 1});
-    // }
-    //
-    // auto unique = counts.find(1)->first;
-    //
-    // Node *bestApple;
-    //
-    // for (auto &apple: apples) {
-    //     if (apple->depth == unique) bestApple = apple;
-    // }
+    // PrintNode(&root);
 
     string pathToApple;
-    // bool done{false};
-    // Node *current = bestApple;
-    //
-    // do {
-    //     pathToApple = current->label + pathToApple;
-    //     if (current->label == "RR") {
-    //         done = true;
-    //     } else {
-    //         current = current->head;
-    //     }
-    // } while (!done);
+    vector<string> pathsToApples;
+    map<int, vector<string *> > pathLengths;
 
+    FindApples(&root, &pathsToApples, "RR");
+
+    for (string &path: pathsToApples) {
+        int length = path.length();
+        if (pathLengths.contains(length)) pathLengths[length].push_back(&path);
+        else pathLengths.insert({length, {&path}});
+    }
+
+    for (auto &length: pathLengths) {
+        if (length.second.size() == 1) pathToApple = *length.second.front();
+    }
 
     return pathToApple;
 }

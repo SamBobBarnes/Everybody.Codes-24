@@ -60,6 +60,7 @@ inline void Day6::PrintNode(Node *root, const int depth) {
 inline void Day6::NewNode(Node *root, const vector<string> &lines) {
     vector<string> q = findLine(lines, root->label);
     for (const string &childLabel: q) {
+        if (childLabel == "BUG" || childLabel == "ANT") continue;
         Node *child = root->AddTail(childLabel);
         NewNode(child, lines);
     }

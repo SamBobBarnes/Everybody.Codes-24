@@ -9,6 +9,26 @@
 
 string Day6::Part3() {
     auto lines = Helpers::readFile(6, 3);
+    Node root{"RR"};
+    NewNode(&root, lines);
 
-    return "0";
+    // PrintNode(&root);
+
+    string pathToApple;
+    vector<string> pathsToApples;
+    map<int, vector<string *> > pathLengths;
+
+    FindApples(&root, &pathsToApples, "R");
+
+    for (string &path: pathsToApples) {
+        int length = path.length();
+        if (pathLengths.contains(length)) pathLengths[length].push_back(&path);
+        else pathLengths.insert({length, {&path}});
+    }
+
+    for (auto &length: pathLengths) {
+        if (length.second.size() == 1) pathToApple = *length.second.front();
+    }
+
+    return pathToApple;
 }

@@ -8,19 +8,8 @@
 #include "Day7.h"
 #include "Plan.h"
 
-string leftPad(const int number, const int width) {
-    string text = to_string(number);
-    if (text.length() < width) {
-        int spaces = width - text.length();
-        for (int i: ranges::views::iota(0, spaces)) {
-            text = " " + text;
-        }
-    }
-    return text;
-}
-
 string Day7::Part1() {
-    cout << endl;
+    // cout << endl;
     auto lines = Helpers::readFile(7, 1);
 
     vector<Plan> plans{};
@@ -33,16 +22,16 @@ string Day7::Part1() {
     int power{10};
     int rounds{10};
 
-    cout << "   ";
+    // cout << "   ";
 
     for (int i: ranges::views::iota(0, rounds + 1)) {
-        cout << leftPad(i, 2) << " ";
+        // cout << Helpers::leftPad(i, 2) << " ";
     }
 
-    cout << endl;
+    // cout << endl;
 
     for (Plan &plan: plans) {
-        cout << plan.label << ": " << power << " ";
+        // cout << plan.label << ": " << power << " ";
         int total{0};
         for (int i: ranges::views::iota(0, rounds)) {
             switch (plan.next()) {
@@ -56,10 +45,10 @@ string Day7::Part1() {
                     break;
             }
 
-            cout << leftPad(power, 2) << " ";
+            // cout << Helpers::leftPad(power, 2) << " ";
             total += power;
         }
-        cout << "= " << leftPad(total, 4) << endl;
+        // cout << "= " << Helpers::leftPad(total, 4) << endl;
         plan.total = total;
         power = 10;
     }

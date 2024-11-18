@@ -4,7 +4,8 @@ int HeightOfTallLayer(const int prevLayerThickness, const int priests, const int
     return ((prevLayerThickness * priests) % acolytes) + acolytes;
 }
 
-long long RemoveBlocksFromColumn(const long long priests, const long long acolytes, const long long baseWidth, const long long columnHeight) {
+long long RemoveBlocksFromColumn(const long long priests, const long long acolytes, const long long baseWidth,
+                                 const long long columnHeight) {
     return (priests * baseWidth * columnHeight) % acolytes;
 }
 

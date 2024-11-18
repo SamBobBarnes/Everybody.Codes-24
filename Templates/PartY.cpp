@@ -1,7 +1,7 @@
 #include "DayX.h"
 
 int DayX::PartY() {
-    auto line = Helpers::readFile(X, Y);
+    auto lines = Helpers::readFile(X, Y);
 
     return 0;
 }

@@ -9,6 +9,13 @@
 #include "../Helpers.h"
 
 struct Plan {
+    explicit Plan(const std::string &label, const std::string &plan) {
+        this->label = label;
+        for (int i = 0; i < plan.length(); i++) {
+            steps.push_back(plan[i]);
+        }
+    }
+
     explicit Plan(const std::string &line) {
         label = Helpers::split(line, ':')[0];
         auto stepStrings = Helpers::split(Helpers::split(line, ':')[1], ',');

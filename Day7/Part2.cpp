@@ -14,7 +14,7 @@ string Day7::Part2() {
     auto lines = Helpers::readFile(7, 2);
 
     int trackLength = track.length();
-    cout << endl;
+    // cout << endl;
 
     vector<Plan> plans{};
 
@@ -26,20 +26,20 @@ string Day7::Part2() {
     int power{10};
     int laps{10};
 
-    cout << "     ";
+    // cout << "     ";
 
-    for (int l: ranges::views::iota(0, laps)) {
-        for (int i: ranges::views::iota(0, trackLength)) {
-            if (trackLength - 1 == i) {
-                cout << "  S ";
-            } else cout << "  " << track[i] << " ";
-        }
-    }
+    // for (int l: ranges::views::iota(0, laps)) {
+    //     for (int i: ranges::views::iota(0, trackLength)) {
+    //         if (trackLength - 1 == i) {
+    //             cout << "  S ";
+    //         } else cout << "  " << track[i] << " ";
+    //     }
+    // }
 
-    cout << endl;
+    // cout << endl;
 
     for (Plan &plan: plans) {
-        cout << plan.label << ": " << power << " ";
+        // cout << plan.label << ": " << power << " ";
         int total{0};
         for (int l: ranges::views::iota(0, laps)) {
             for (int i: ranges::views::iota(0, trackLength)) {
@@ -70,11 +70,11 @@ string Day7::Part2() {
                         cout << "TILT" << endl;
                 }
 
-                cout << Helpers::leftPad(power, 3) << " ";
+                // cout << Helpers::leftPad(power, 3) << " ";
                 total += power;
             }
         }
-        cout << "= " << Helpers::leftPad(total, 4) << endl;
+        // cout << "= " << Helpers::leftPad(total, 4) << endl;
         plan.total = total;
         power = 10;
     }

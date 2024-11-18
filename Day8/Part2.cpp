@@ -9,10 +9,6 @@ int Day8::Part2() {
     int acolytes{1111};
     int material{20240000};
 
-    // int priests{3};
-    // int acolytes{5};
-    // int material{50};
-
     int index{1};
     int currentUsage{1};
     int prevLayerThickness{1};

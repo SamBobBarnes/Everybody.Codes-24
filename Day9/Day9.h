@@ -12,6 +12,8 @@ public:
     static int Part2();
 
     static int Part3();
+
+    static int minCoins(int i, int sum, vector<int> *coins, vector<vector<int> > *memo);
 };
 
 #endif //DAY9_H

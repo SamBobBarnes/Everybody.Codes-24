@@ -1,6 +1,6 @@
 #include "Day8.h"
 
-int HeightOfLayer(int prevLayerThickness, int priests, int acolytes) {
+int HeightOfLayer(const int prevLayerThickness, const int priests, const int acolytes) {
     return (prevLayerThickness * priests) % acolytes;
 }
 

@@ -1,11 +1,11 @@
-#ifndef DAYX_H
-#define DAYX_H
+#ifndef DAY8_H
+#define DAY8_H
 
 #include "../Helpers.h"
 
 using namespace std;
 
-class DayX {
+class Day8 {
 public:
     static int Part1();
 
@@ -14,4 +14,4 @@ public:
     static int Part3();
 };
 
-#endif //DAYX_H
+#endif //DAY8_H

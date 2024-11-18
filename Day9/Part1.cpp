@@ -10,19 +10,15 @@ int Day9::Part1() {
     vector<int> beetleCounts{};
 
     for (const int &goal: numbers) {
-        int left = goal;
         int current{0};
         int beetlesUsed{0};
-        int tens = left / 10;
+        int tens = (goal - current) / 10;
         current += tens * 10;
-        left = goal - current;
-        int fives = left / 5;
+        int fives = (goal - current) / 5;
         current += fives * 5;
-        left = goal - current;
-        int threes = left / 3;
+        int threes = (goal - current) / 3;
         current += threes * 3;
-        left = goal - current;
-        int ones = left;
+        int ones = (goal - current);
         beetlesUsed = ones + threes + fives + tens;
         beetleCounts.push_back(beetlesUsed);
     }

@@ -3,7 +3,7 @@
 //
 
 #include <algorithm>
-#include <__ranges/iota_view.h>
+#include <ranges>
 
 #include "Day7.h"
 #include "Plan.h"

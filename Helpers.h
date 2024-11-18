@@ -13,8 +13,8 @@
 
 #include <cerrno>
 #include <iostream>
+#include <ranges>
 #include <vector>
-#include <__ranges/iota_view.h>
 
 #ifndef HELPERS_H
 #define HELPERS_H
@@ -99,7 +99,7 @@ public:
         std::string text = std::to_string(number);
         if (text.length() < width) {
             int spaces = width - text.length();
-            for (int i: std::ranges::views::iota(0, spaces)) {
+            for (int i: std::views::iota(0, spaces)) {
                 text = " " + text;
             }
         }

@@ -1,14 +1,9 @@
 #include "Day8.h"
 
-
-int WidthOfTower(int height) {
-    return 1 + 2 * (height - 1);
-}
-
-int TotalBlocks(int height) {
+int TotalBlocks(const int height) {
     int total{0};
     for (int i = 1; i <= height; i++) {
-        total += WidthOfTower(i);
+        total += Day8::WidthOfTower(i);
     }
     return total;
 }

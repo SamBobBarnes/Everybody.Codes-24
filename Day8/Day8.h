@@ -12,6 +12,10 @@ public:
     static int Part2();
 
     static int Part3();
+
+    static int WidthOfTower(const int height) {
+        return 1 + 2 * (height - 1);
+    }
 };
 
 #endif //DAY8_H

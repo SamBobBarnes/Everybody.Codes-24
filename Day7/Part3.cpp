@@ -64,7 +64,7 @@ string TrackMap() {
             if (direction == 4) direction = 0;
             continue;
         }
-        if (map[next.y][next.x]) done = true;
+        if (map[next.y][next.x] == 'S') done = true;
         track += map[next.y][next.x];
         previous = current;
         current = next;
@@ -76,8 +76,9 @@ string Day7::Part3() {
     auto lines = Helpers::readFile(7, 3);
 
     string track = TrackMap();
+    // cout << endl << "Track: " << track << endl;
     int trackLength = track.length();
-    Plan opponentPlan{"opponent", "+-=+-=+-=++"};
+    Plan opponentPlan{"opponent", "=-=+=+-++-+"};
 
     map<char, int> chars{{'=', 3}, {'-', 3}, {'+', 5}};
     int length{11};

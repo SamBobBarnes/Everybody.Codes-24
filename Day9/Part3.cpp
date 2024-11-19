@@ -38,44 +38,27 @@ int Day9::Part3() {
 
     vector<int> stamps{1, 3, 5, 10, 15, 16, 20, 24, 25, 30, 37, 38, 49, 50, 74, 75, 100, 101};
 
-    vector<int> beetleCounts{};
+    vector<int> minCount;
+    int max = 0, total = 0;
 
-    for (const int &goal: numbers) {
-        vector<Pair> pairs{};
-
-        for (int x = 0; x < 50; x++) {
-            int left;
-            int right;
-            if (goal % 2 == 0) {
-                left = goal / 2 - x;
-                right = goal / 2 + x;
-            } else {
-                left = goal / 2 - x;
-                right = goal / 2 + 1 + x;
-            }
-
-            int leftResult;
-            int rightResult;
-            vector range{1, 2};
-            for (int s: range) {
-                int sum;
-                if (s == 1) sum = left;
-                else sum = right;
-                int beetles = minCoins2(sum, &stamps);
-                if (s == 1) leftResult = beetles;
-                else rightResult = beetles;
-            }
-            pairs.emplace_back(leftResult, rightResult);
-        }
-
-        sort(pairs.begin(), pairs.end());
-
-        beetleCounts.push_back(pairs.front().total());
+    for (int i: numbers) {
+        max = std::max(max, i);
+    }
+    minCount.resize(max / 2 + 51);
+    for (int x = 1; x < minCount.size(); ++x) {
+        int min = Max;
+        for (int s: stamps)
+            if (x - s >= 0)
+                min = std::min(min, minCount[x - s]);
+        minCount[x] = min + 1;
     }
 
-    int total{0};
-
-    for (const int &count: beetleCounts) total += count;
+    for (int b: numbers) {
+        int l = b / 2, h = b - l, min = Max;
+        do min = std::min(min, minCount[l--] + minCount[h++]);
+        while (h - l <= 100);
+        total += min;
+    }
 
     return total;
 }

@@ -3,6 +3,32 @@
 #include "Day9.h"
 #include "Pair.h"
 
+int Day9::minCoins2(int sum, vector<int> *coins) {
+    vector<int> dp{};
+    for (int i = 0; i < sum + 1; i++) dp.push_back(Max);
+    dp[0] = 0;
+
+    for (int i = coins->size() - 1; i >= 0; i--) {
+        for (int j = 1; j <= sum; j++) {
+            int take = Max;
+            int noTake = Max;
+
+            if (j - coins[0][i] >= 0 && coins[0][i] > 0) {
+                take = dp[j - coins[0][i]];
+                if (take != Max)take++;
+            }
+            if (i + 1 < coins->size())
+                noTake = dp[j];
+
+            dp[j] = min(take, noTake);
+        }
+    }
+
+    if (dp[sum] != Max)return dp[sum];
+    return -1;
+}
+
+
 int Day9::Part3() {
     auto lines = Helpers::readFile(9, 3);
     vector<int> numbers{};
@@ -10,7 +36,7 @@ int Day9::Part3() {
         numbers.push_back(stoi(line));
     }
 
-    vector<int> stamps{101, 100, 75, 74, 50, 49, 38, 37, 30, 25, 24, 20, 16, 15, 10, 5, 3, 1};
+    vector<int> stamps{1, 3, 5, 10, 15, 16, 20, 24, 25, 30, 37, 38, 49, 50, 74, 75, 100, 101};
 
     vector<int> beetleCounts{};
 
@@ -32,18 +58,10 @@ int Day9::Part3() {
             int rightResult;
             vector range{1, 2};
             for (int s: range) {
-                vector<vector<int> > memo{};
-                for (int i = 0; i < stamps.size(); i++) {
-                    vector<int> row{};
-                    for (int j = 0; j < goal + 1; j++) {
-                        row.push_back(-1);
-                    }
-                    memo.push_back(row);
-                }
                 int sum;
                 if (s == 1) sum = left;
                 else sum = right;
-                int beetles = minCoins(0, sum, &stamps, &memo);
+                int beetles = minCoins2(sum, &stamps);
                 if (s == 1) leftResult = beetles;
                 else rightResult = beetles;
             }

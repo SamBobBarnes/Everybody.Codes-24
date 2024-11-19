@@ -14,6 +14,10 @@ public:
     static int Part3();
 
     static int minCoins(int i, int sum, vector<int> *coins, vector<vector<int> > *memo);
+
+    static int minCoins2(int sum, vector<int> *coins);
+
+    static constexpr int Max = std::numeric_limits<int>::max();
 };
 
 #endif //DAY9_H

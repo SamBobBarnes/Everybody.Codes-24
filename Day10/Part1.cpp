@@ -1,6 +1,6 @@
 #include "Day10.h"
 
-char SearchForMatch(const int x, const int y, vector<vector<char> > *map) {
+char Day10::SearchForMatch(const int x, const int y, vector<vector<char> > *map) {
     vector<char> tb{};
     vector<char> lr{};
     for (int my = 0; my < 8; ++my) {

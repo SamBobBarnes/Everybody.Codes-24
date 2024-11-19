@@ -14,6 +14,7 @@ char Day10::SearchForMatch(const int x, const int y, vector<vector<char> > *map)
 
     for (char i: tb)
         if (ranges::find(lr, i) != lr.end()) return i;
+    return 0;
 }
 
 string Day10::Part1() {

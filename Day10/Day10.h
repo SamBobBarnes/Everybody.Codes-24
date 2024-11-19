@@ -14,7 +14,7 @@ public:
     static int Part3();
 
 private:
-    char Day10::SearchForMatch(int x, int y, vector<vector<char> > *map);
+    static char SearchForMatch(int x, int y, vector<vector<char> > *map);
 };
 
 #endif //DAY10_H

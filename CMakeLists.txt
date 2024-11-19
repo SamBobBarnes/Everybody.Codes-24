@@ -48,7 +48,11 @@ Day9/Day9.h
         Day9/Part2.cpp
         Day9/Part3.cpp
         Day9/Pair.h
-        ####
+        Day10/Day10.h
+        Day10/Part1.cpp
+        Day10/Part2.cpp
+        Day10/Part3.cpp
+####
 )
 
 add_subdirectory(tests)

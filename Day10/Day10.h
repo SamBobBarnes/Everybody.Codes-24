@@ -9,9 +9,9 @@ class Day10 {
 public:
     static string Part1();
 
-    static string Part2();
+    static int Part2();
 
-    static string Part3();
+    static int Part3();
 };
 
 #endif //DAY10_H

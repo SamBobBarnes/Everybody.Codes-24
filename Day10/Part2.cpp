@@ -19,7 +19,19 @@ int CalculatePower(string word) {
 int Day10::Part2() {
     auto lines = Helpers::readFile(10, 2);
     vector<vector<vector<char> > > maps{};
-
+    for (int j = 0; j < 7; j++) {
+        for (int i = 0; i < 15; i++) {
+            vector<vector<char> > map{};
+            for (int y = 0; y < 8; y++) {
+                vector<char> row{};
+                for (int x = 0; x < 8; x++) {
+                    row.push_back(lines[y + 9 * j][x + 9 * i]);
+                }
+                map.push_back(row);
+            }
+            maps.push_back(map);
+        }
+    }
 
     int total{0};
     for (auto map: maps) {
@@ -32,4 +44,6 @@ int Day10::Part2() {
 
         total += CalculatePower(word);
     }
+
+    return total;
 }

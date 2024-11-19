@@ -43,20 +43,13 @@ char FindMissing(const int x, const int y, const vector<string> *map, const Poin
             }
         }
     }
+    if (duplicatesTb.size() < 3 || duplicatesLr.size() < 3) return '?';
 
     for (int i = 0; i < 8; ++i) {
         if (ranges::find(duplicatesTb, tb[i]) == duplicatesTb.end() && tb[i] != '?') return tb[i];
         if (ranges::find(duplicatesLr, lr[i]) == duplicatesLr.end() && lr[i] != '?') return lr[i];
     }
     return '?';
-}
-
-int Count(const vector<char> *l, const char x) {
-    int total{0};
-    for (int i = 0; i < l->size(); ++i) {
-        if (l[0][i] == x)total++;
-    }
-    return total;
 }
 
 void FillInQ(const int x, const int y, vector<string> *map, const Point *origin, const char missing) {
@@ -69,19 +62,26 @@ void FillInQ(const int x, const int y, vector<string> *map, const Point *origin,
         lr.push_back(map[0][y + origin->y][mx + origin->x]);
     }
 
-    if (Count(&tb, missing) < 2) {
+    if (Day10::Count(&tb, missing) < 2) {
         auto it = ranges::find(tb, '?');
         if (it != tb.end()) {
             auto index = distance(tb.begin(), it);
             map[0][index + origin->y][x + origin->x] = missing;
         }
-    } else if (Count(&lr, missing) < 2) {
+    } else if (Day10::Count(&lr, missing) < 2) {
         auto it = ranges::find(lr, '?');
         if (it != lr.end()) {
             auto index = distance(lr.begin(), it);
             map[0][y + origin->y][index + origin->x] = missing;
         }
     }
+}
+
+void PrintMap(const vector<string> &map) {
+    string text;
+    for (const auto &line: map) text += line + "\n";
+
+    cout << endl << text << endl;
 }
 
 int Day10::Part3() {
@@ -96,6 +96,8 @@ int Day10::Part3() {
         }
     }
 
+    // PrintMap(map);
+
     int total{0};
     vector<string> words;
     for (auto origin: origins) {
@@ -107,7 +109,7 @@ int Day10::Part3() {
                 word += rune;
             }
         }
-
+        // PrintMap(map);
         for (int i = 0; i < 16; ++i) {
             if (word[i] == '?') {
                 int x = i % 4 + 2;
@@ -119,13 +121,64 @@ int Day10::Part3() {
                     FillInQ(x, y, &map, &origin, missing);
                     word[i] = missing;
                 }
+                // PrintMap(map);
             }
         }
 
         words.push_back(word);
 
-        total += CalculatePower(word);
+        if (ValidWord(&word))
+            total += CalculatePower(word);
     }
 
-    return 0;
+    vector<Point> mapsToSolve{};
+    for (int i = 0; i < words.size(); ++i) {
+        if (!ValidWord(&words[i])) mapsToSolve.push_back(origins[i]);
+    }
+    int mapsSolved;
+
+    do {
+        mapsSolved = 0;
+        vector<Point *> originsSolved{};
+        for (auto origin: mapsToSolve) {
+            string word;
+            for (int y = 2; y < 6; ++y) {
+                for (int x = 2; x < 6; ++x) {
+                    char rune = SearchForMatch3(x, y, &map, &origin);
+                    map[y + origin.y][x + origin.x] = rune;
+                    word += rune;
+                }
+            }
+            // PrintMap(map);
+            for (int i = 0; i < 16; ++i) {
+                if (word[i] == '?') {
+                    int x = i % 4 + 2;
+                    int y = i / 4 + 2;
+
+                    char missing = FindMissing(x, y, &map, &origin);
+                    if (missing != '?') {
+                        map[y + origin.y][x + origin.x] = missing;
+                        FillInQ(x, y, &map, &origin, missing);
+                        word[i] = missing;
+                    }
+                    // PrintMap(map);
+                }
+            }
+
+            if (ValidWord(&word)) {
+                total += CalculatePower(word);
+                originsSolved.push_back(&origin);
+                mapsSolved++;
+            }
+        }
+        for (auto origin: originsSolved) {
+            auto it = find_if(mapsToSolve.begin(), mapsToSolve.end(), [origin](Point &o) {
+                return o.x == origin->x && o.y == origin->y;
+            });
+            mapsToSolve.erase(it);
+        }
+    } while (mapsSolved > 0);
+
+
+    return total;
 }

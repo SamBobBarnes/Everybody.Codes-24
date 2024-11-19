@@ -14,8 +14,29 @@ public:
 
     static int Part3();
 
+    static int Count(const vector<char> *l, const char x) {
+        int total{0};
+        for (int i = 0; i < l->size(); ++i) {
+            if (l[0][i] == x)total++;
+        }
+        return total;
+    }
+
+    static int Count(const string *l, const char x) {
+        int total{0};
+        for (int i = 0; i < l->size(); ++i) {
+            if (l[0][i] == x)total++;
+        }
+        return total;
+    }
+
+    static bool ValidWord(const string *word) {
+        return Count(word,'?') == 0;
+    }
+
 private:
     static int CalculatePower(string word);
+
     static char SearchForMatch(int x, int y, vector<vector<char> > *map);
 
     static char SearchForMatch3(int x, int y, const vector<string> *map, const Point *origin);

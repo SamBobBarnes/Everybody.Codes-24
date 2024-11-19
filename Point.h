@@ -20,6 +20,15 @@ struct Point {
         return y < other.y;
     }
 
+    bool operator>(const Point &other) const {
+        if (x == other.x) return y > other.y;
+        return x > other.x;
+    }
+
+    bool operator==(const Point &other) const {
+        return x == other.x && y > other.y;
+    }
+
     int x;
     int y;
 };

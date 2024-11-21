@@ -52,6 +52,10 @@ Day9/Day9.h
         Day10/Part1.cpp
         Day10/Part2.cpp
         Day10/Part3.cpp
+Day11/Day11.h
+        Day11/Part1.cpp
+        Day11/Part2.cpp
+        Day11/Part3.cpp
 ####
 )
 

@@ -17,7 +17,7 @@ char Day10::SearchForMatch3(const int x, const int y, const vector<string> *map,
 
     for (char i: tb)
         if (ranges::find(lr, i) != lr.end()) return i;
-    return '?';
+    return '.';
 }
 
 char FindMissing(const int x, const int y, const vector<string> *map, const Point *origin) {
@@ -29,6 +29,9 @@ char FindMissing(const int x, const int y, const vector<string> *map, const Poin
     for (int mx = 0; mx < 8; ++mx) {
         lr.push_back(map[0][y + origin->y][mx + origin->x]);
     }
+
+    if (Day10::Count(&tb, '?') > 1) return '?';
+    if (Day10::Count(&lr, '?') > 1) return '?';
 
     vector<char> duplicatesTb{};
     vector<char> duplicatesLr{};
@@ -43,12 +46,14 @@ char FindMissing(const int x, const int y, const vector<string> *map, const Poin
             }
         }
     }
-    if (duplicatesTb.size() < 3 || duplicatesLr.size() < 3) return '?';
+
 
     for (int i = 0; i < 8; ++i) {
-        if (ranges::find(duplicatesTb, tb[i]) == duplicatesTb.end() && tb[i] != '?') return tb[i];
         if (ranges::find(duplicatesLr, lr[i]) == duplicatesLr.end() && lr[i] != '?') return lr[i];
+        if (ranges::find(duplicatesTb, tb[i]) == duplicatesTb.end() && tb[i] != '?') return tb[i];
     }
+
+
     return '?';
 }
 
@@ -139,7 +144,7 @@ int Day10::Part3() {
 
     do {
         mapsSolved = 0;
-        vector<Point *> originsSolved{};
+        vector<Point> originsSolved{};
         for (auto origin: mapsToSolve) {
             string word;
             for (int y = 2; y < 6; ++y) {
@@ -167,16 +172,17 @@ int Day10::Part3() {
 
             if (ValidWord(&word)) {
                 total += CalculatePower(word);
-                originsSolved.push_back(&origin);
+                originsSolved.push_back(origin);
                 mapsSolved++;
             }
         }
         for (auto origin: originsSolved) {
             auto it = find_if(mapsToSolve.begin(), mapsToSolve.end(), [origin](Point &o) {
-                return o.x == origin->x && o.y == origin->y;
+                return o.x == origin.x && o.y == origin.y;
             });
             mapsToSolve.erase(it);
         }
+        originsSolved.clear();
     } while (mapsSolved > 0);
 
 

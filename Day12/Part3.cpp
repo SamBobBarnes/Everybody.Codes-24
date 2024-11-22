@@ -12,9 +12,13 @@ int Day12::Part3() {
         targets.emplace_back(stoi(coords[0]), stoi(coords[1]) + 1);
     }
 
-    int ranking{0};
+    /// First Problem
+    /// need to be able to target before apex of balistic trajectory
+    ///
+    /// Second problem
+    /// need to be able to find the earliest possible interdiction point
 
-    cout << CanHit(1, {2, 3}) << endl;
+    int ranking{0};
 
     for (auto target: targets) {
         vector<int> rankings{};

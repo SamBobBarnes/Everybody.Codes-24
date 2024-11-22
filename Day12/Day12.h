@@ -14,10 +14,6 @@ public:
 
     static int Part3();
 
-    static int GetLandingDistance(int height, int power) {
-        return power * 3 + height - 1;
-    }
-
     static int GetPower(int distance) {
         double power = distance / 3.0;
         if (floor(power) == power) return power;
@@ -33,8 +29,6 @@ public:
         return {meteor.x - time, meteor.y - time};
     }
 
-    static int GetBestPower(int height, Point target) {
-    }
 };
 
 #endif //DAY12_H

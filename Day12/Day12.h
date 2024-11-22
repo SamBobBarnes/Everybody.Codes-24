@@ -28,6 +28,13 @@ public:
         int distance = target.x - (height - target.y);
         return GetPower(distance);
     }
+
+    static Point PointInTime(Point meteor, int time) {
+        return {meteor.x - time, meteor.y - time};
+    }
+
+    static int GetBestPower(int height, Point target) {
+    }
 };
 
 #endif //DAY12_H

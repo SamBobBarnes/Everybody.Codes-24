@@ -60,6 +60,10 @@ Day12/Day12.h
         Day12/Part1.cpp
         Day12/Part2.cpp
         Day12/Part3.cpp
+Day13/Day13.h
+        Day13/Part1.cpp
+        Day13/Part2.cpp
+        Day13/Part3.cpp
 ####
 )
 

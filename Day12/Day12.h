@@ -28,7 +28,6 @@ public:
     static Point PointInTime(Point meteor, int time) {
         return {meteor.x - time, meteor.y - time};
     }
-
 };
 
 #endif //DAY12_H

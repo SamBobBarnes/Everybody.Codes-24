@@ -3,21 +3,6 @@
 #include "Day12.h"
 #include "../Point.h"
 
-int GetLandingDistance(int height, int power) {
-    return power * 3 + height - 1;
-}
-
-int GetPower(int distance) {
-    double power = distance / 3.0;
-    if (floor(power) == power) return power;
-    return -1;
-}
-
-int CanHit(int height, Point target) {
-    int distance = target.x - (height - target.y);
-    return GetPower(distance);
-}
-
 int Day12::Part1() {
     auto lines = Helpers::readFile(12, 1);
 

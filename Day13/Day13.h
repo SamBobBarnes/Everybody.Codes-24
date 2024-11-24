@@ -12,6 +12,8 @@ public:
     static int Part2();
 
     static int Part3();
+
+    static constexpr int Max = std::numeric_limits<int>::max();
 };
 
 #endif //DAY13_H

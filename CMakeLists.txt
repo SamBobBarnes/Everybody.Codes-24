@@ -69,7 +69,8 @@ Day13/Day13.h
         Day14/Part1.cpp
         Day14/Part2.cpp
         Day14/Part3.cpp
-####
+        Day14/direction.h
+        ####
 )
 
 add_subdirectory(tests)

@@ -6,6 +6,9 @@
 #define POINT_H
 
 struct Point {
+    Point() {
+    }
+
     Point(const int x, const int y) {
         this->x = x;
         this->y = y;
@@ -34,6 +37,9 @@ struct Point {
 };
 
 struct Point3 : Point {
+    Point3() {
+    }
+
     Point3(const int x, const int y, const int z): Point(x, y) {
         this->z = z;
     }

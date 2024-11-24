@@ -4,7 +4,6 @@
 
 int Day14::Part2() {
     auto lines = Helpers::readFile(14, 2);
-    vector<vector<GrowthPlan> > plans{};
 
     set<Point3> uniquePoints{};
 

@@ -1,5 +1,4 @@
 #include "Day14.h"
-#include "direction.h"
 
 int Day14::Part1() {
     auto lines = Helpers::readFile(14, 1);

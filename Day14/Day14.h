@@ -2,6 +2,8 @@
 #define DAY14_H
 
 #include "../Helpers.h"
+#include "direction.h"
+#include "../Point.h"
 
 using namespace std;
 

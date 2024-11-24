@@ -33,4 +33,25 @@ struct Point {
     int y;
 };
 
+struct Point3 : Point {
+    Point3(const int x, const int y, const int z): Point(x, y) {
+        this->z = z;
+    }
+
+    int z;
+
+    bool operator<(const Point3 &other) const {
+        if (z == other.z) {
+            if (y == other.y) return x < other.x;
+            return y < other.y;
+        }
+        return z < other.z;
+    }
+
+
+    bool operator==(const Point3 &other) const {
+        return x == other.x && y == other.y && z == other.z;
+    }
+};
+
 #endif //POINT_H

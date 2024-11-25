@@ -4,14 +4,14 @@
 
 #include "Day14.h"
 
-vector<Point3> getNeighbors(Point3 p, map<Point3, bool> *points) {
+vector<Point3> getNeighbors(Point3 p, const map<Point3, bool> *points) {
     vector<Point3> list{};
-    if (points->at({p.x, p.y, p.z + 1})) list.push_back({p.x, p.y, p.z + 1});
-    if (points->at({p.x, p.y, p.z - 1})) list.push_back({p.x, p.y, p.z - 1});
-    if (points->at({p.x, p.y + 1, p.z})) list.push_back({p.x, p.y + 1, p.z});
-    if (points->at({p.x, p.y - 1, p.z})) list.push_back({p.x, p.y - 1, p.z});
-    if (points->at({p.x + 1, p.y, p.z})) list.push_back({p.x + 1, p.y, p.z});
-    if (points->at({p.x - 1, p.y, p.z})) list.push_back({p.x - 1, p.y, p.z});
+    if (points->contains({p.x, p.y, p.z + 1})) list.push_back({p.x, p.y, p.z + 1});
+    if (points->contains({p.x, p.y, p.z - 1})) list.push_back({p.x, p.y, p.z - 1});
+    if (points->contains({p.x, p.y + 1, p.z})) list.push_back({p.x, p.y + 1, p.z});
+    if (points->contains({p.x, p.y - 1, p.z})) list.push_back({p.x, p.y - 1, p.z});
+    if (points->contains({p.x + 1, p.y, p.z})) list.push_back({p.x + 1, p.y, p.z});
+    if (points->contains({p.x - 1, p.y, p.z})) list.push_back({p.x - 1, p.y, p.z});
     return list;
 };
 
@@ -77,9 +77,10 @@ int Day14::Part3() {
 
     vector<int> totals{};
 
-    auto cmp = [](const tuple<Point3, int> l, const tuple<Point3, int> r) { return get<1>(l) < get<1>(r); };
+    auto cmp = [](const tuple<Point3, int> l, const tuple<Point3, int> r) { return get<1>(l) > get<1>(r); };
 
     for (auto end: trunk) {
+        // auto end = trunk[5];
         int minTotal{0};
         for (const auto leaf: leaves | views::keys) {
             priority_queue<tuple<Point3, int>, std::vector<tuple<Point3, int> >, decltype(cmp)> q{};

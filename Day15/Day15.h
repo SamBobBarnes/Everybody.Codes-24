@@ -2,6 +2,8 @@
 #define DAY15_H
 
 #include "../Helpers.h"
+#include "../Point.h"
+#include "GardenPoint.h"
 
 using namespace std;
 

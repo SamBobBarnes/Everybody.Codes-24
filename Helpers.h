@@ -95,6 +95,16 @@ public:
         return result;
     }
 
+    static std::vector<char> splitIntoChars(std::string input) {
+        std::vector<char> result{};
+
+        for (int i = 0; i < input.length(); ++i) {
+            result.push_back(input[i]);
+        }
+
+        return result;
+    }
+
     static std::string leftPad(const int number, const int width) {
         std::string text = std::to_string(number);
         if (text.length() < width) {

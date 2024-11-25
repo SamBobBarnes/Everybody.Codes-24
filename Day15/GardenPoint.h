@@ -8,12 +8,14 @@
 #include "../Point.h"
 
 struct GardenPoint : Point {
-    GardenPoint(const int x, const int y, const bool bush, const bool herb): Point(x, y), bush(bush), herb(herb) {
+    GardenPoint(const int x, const int y, const bool impasse, const bool herb, const char tileChar): Point(x, y),
+        impasse(impasse), herb(herb), tileChar(tileChar) {
     }
 
     GardenPoint *parent = nullptr;
-    bool bush{true};
+    bool impasse{true};
     bool herb{false};
+    char tileChar;
 };
 
 #endif //GARDENPOINT_H

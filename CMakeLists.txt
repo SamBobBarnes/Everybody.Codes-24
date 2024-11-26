@@ -75,7 +75,11 @@ Day13/Day13.h
         Day15/Part2.cpp
         Day15/Part3.cpp
         Day15/GardenPoint.h
-        ####
+        Day16/Day16.h
+        Day16/Part1.cpp
+        Day16/Part2.cpp
+        Day16/Part3.cpp
+####
 )
 
 add_subdirectory(tests)

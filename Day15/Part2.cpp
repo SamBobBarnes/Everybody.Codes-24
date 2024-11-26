@@ -92,11 +92,25 @@ int Day15::Part2() {
         EraseParentageAndHerb(&garden, goal->tileChar);
     }
 
-    const auto goal = bfs(&garden, start, entrance);
+    auto goal = bfs(&garden, start, entrance);
 
+    int t1{0};
     const GardenPoint *current = goal;
     while (current != start) {
         total++;
+        t1++;
+        current = current->parent;
+    }
+
+    EraseParentageAndHerb(&garden, ' ');
+
+    start = &garden[75][83];
+    goal = bfs(&garden, start, entrance);
+
+    int t{0};
+    current = goal;
+    while (current != start) {
+        t++;
         current = current->parent;
     }
 

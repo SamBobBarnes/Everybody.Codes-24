@@ -79,7 +79,8 @@ Day13/Day13.h
         Day16/Part1.cpp
         Day16/Part2.cpp
         Day16/Part3.cpp
-####
+        Day16/CatFace.h
+        ####
 )
 
 add_subdirectory(tests)

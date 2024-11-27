@@ -12,11 +12,14 @@ struct CatFace {
         for (int i = 0; i < face.length(); ++i) {
             chars[face[i]]++;
         }
+        chars2[face[0]]++;
+        chars2[face[2]]++;
     }
 
     std::string face{};
 
     std::map<char, int> chars{};
+    std::map<char, int> chars2{};
 };
 
 #endif //CATFACE_H

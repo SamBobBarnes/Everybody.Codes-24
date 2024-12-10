@@ -15,7 +15,7 @@ map<char, int> GetCounts2(vector<CatFace *> row) {
     return counts;
 }
 
-int Day16::Part2() {
+long long Day16::Part2() {
     const auto lines = Helpers::readFile(16, 2);
     vector<int> spinCounts{};
     for (const auto countStrings = Helpers::split(lines[0], ','); auto spin: countStrings) {
@@ -42,79 +42,72 @@ int Day16::Part2() {
     currentIndex.resize(wheelCount);
 
     vector<CatFace *> currentFaces{};
-    vector<string> indexHistory{};
 
-    long rounds = 202420242024;
+    long long rounds = 202420242024;
     long duplicateIndex{0};
-    long total{0};
+    long long total{0};
 
-    for (int i = 0; i < rounds; ++i) {
+    for (int i = 1; i <= rounds; ++i) {
         currentFaces.clear();
-        string currentIndexString;
         for (int j = 0; j < currentIndex.size(); ++j) {
             currentIndex[j] += spinCounts[j];
-        }
+        } // rotate wheels
 
         for (int k = 0; k < spinCounts.size(); ++k) {
             int wheelIndex = currentIndex[k] % wheels[k].size();
-            currentIndexString += to_string(wheelIndex);
             currentFaces.push_back(&wheels[k][wheelIndex]);
-        }
+        } // sets current faces array
 
-        if (ranges::find(indexHistory, currentIndexString) != indexHistory.end()) {
-            duplicateIndex = i;
-            break;
-        }
-
-        auto currentCounts = GetCounts2(currentFaces);
+        auto currentCounts = GetCounts2(currentFaces); // counts face symbols
         int score{0};
         for (const auto val: currentCounts | views::values) {
             if (val >= 3) {
                 score += val - 2;
             }
-        }
+        } // tallies totals
         total += score;
 
-        indexHistory.push_back(currentIndexString);
+        bool duplicate{true};
+        for (auto j = 0; j < currentIndex.size(); j++) {
+            if (currentIndex[j] % wheels[j].size() != 0) {
+                duplicate = false;
+                break;
+            }
+        }
+
+        if (duplicate) {
+            duplicateIndex = i;
+            break;
+        } // checks for the first duplicate
     }
 
-    int roundsRemainder = rounds % (duplicateIndex - 1);
-    int duplicateRounds = rounds / (duplicateIndex - 1);
+    int roundsRemainder = rounds % (duplicateIndex);
+    long long duplicateRounds = rounds / (duplicateIndex);
 
     total *= duplicateRounds;
 
-    for (int j = 0; j < currentIndex.size(); ++j) {
-        currentIndex[j] -= spinCounts[j];
-    }
+    currentIndex.clear();
+    currentIndex.resize(wheelCount);
 
     for (int i = 0; i < roundsRemainder; ++i) {
         currentFaces.clear();
-        string currentIndexString;
         for (int j = 0; j < currentIndex.size(); ++j) {
             currentIndex[j] += spinCounts[j];
-        }
+        } // rotate wheels
 
         for (int k = 0; k < spinCounts.size(); ++k) {
             int wheelIndex = currentIndex[k] % wheels[k].size();
-            currentIndexString += to_string(wheelIndex);
             currentFaces.push_back(&wheels[k][wheelIndex]);
-        }
+        } // sets current faces array
 
-        if (ranges::find(indexHistory, currentIndexString) != indexHistory.end()) {
-            duplicateIndex = i;
-            break;
-        }
-
-        auto currentCounts = GetCounts2(currentFaces);
+        auto currentCounts = GetCounts2(currentFaces); // counts face symbols
         int score{0};
         for (const auto val: currentCounts | views::values) {
             if (val >= 3) {
                 score += val - 2;
             }
-        }
+        } // tallies totals
         total += score;
-
-        indexHistory.push_back(currentIndexString);
     }
 
     return total;

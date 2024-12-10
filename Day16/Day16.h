@@ -9,7 +9,7 @@ class Day16 {
 public:
     static string Part1();
 
-    static int Part2();
+    static long long Part2();
 
     static int Part3();
 };

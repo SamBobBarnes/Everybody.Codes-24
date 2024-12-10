@@ -3,6 +3,17 @@
 #include "CatFace.h"
 #include "Day16.h"
 
+void Day16::GenerateCombinations(vector<vector<CatFace> > *wheels, set<vector<int> > *faceCombos,
+                                 const vector<int> &currentCombo,
+                                 const int index) {
+    for (int i = 0; i < (*wheels)[index].size(); ++i) {
+        vector<int> nextCombo = currentCombo;
+        nextCombo.push_back(i);
+        if (index == wheels->size() - 1) faceCombos->insert(nextCombo);
+        else GenerateCombinations(wheels, faceCombos, nextCombo, index + 1);
+    }
+}
+
 int Day16::Part3() {
     const auto lines = Helpers::readFile(16, 3);
 
@@ -35,7 +46,32 @@ int Day16::Part3() {
     long long rounds = 256;
     long long total{0};
 
-    set<vector<CatFace *> > faceCombos{};
+    set<vector<int> > faceCombos{};
+
+    GenerateCombinations(&wheels, &faceCombos);
+
+    vector<LinkedNode> nodes{};
+
+    for (const auto &combo: faceCombos) {
+        nodes.emplace_back(combo, &wheels);
+    }
+
+    for (auto &node: nodes) {
+        currentIndex = node.positions;
+        for (int j = 0; j < currentIndex.size(); ++j) {
+            currentIndex[j] = (spinCounts[j] + currentIndex[j]) % wheels[j].size();
+        }
+
+        node.next = &*ranges::find_if(nodes, [currentIndex](const LinkedNode &p) { return p.equals(currentIndex); });
+        auto up = node.upPosition(&wheels);
+        auto down = node.downPosition(&wheels);
+        node.up = &*ranges::find_if(nodes, [up](const LinkedNode &p) { return p.equals(up); });
+        node.down = &*ranges::find_if(
+            nodes, [down](const LinkedNode &p) { return p.equals(down); });
+    }
+
+    auto start = &nodes[0];
+    //dijkstra
 
 
     return 0;

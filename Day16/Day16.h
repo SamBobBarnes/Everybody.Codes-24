@@ -1,6 +1,7 @@
 #ifndef DAY16_H
 #define DAY16_H
 
+#include "CatFace.h"
 #include "../Helpers.h"
 
 using namespace std;
@@ -24,6 +25,10 @@ public:
 
         return counts;
     }
+
+    static void GenerateCombinations(vector<vector<CatFace> > *wheels, set<vector<int> > *faceCombos,
+                                     const vector<int> &currentCombo = {},
+                                     int index = 0);
 };
 
 #endif //DAY16_H

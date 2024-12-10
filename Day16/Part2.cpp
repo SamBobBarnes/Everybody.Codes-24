@@ -3,18 +3,6 @@
 #include "CatFace.h"
 #include "Day16.h"
 
-map<char, int> GetCounts2(vector<CatFace *> row) {
-    map<char, int> counts{};
-
-    for (const CatFace *cat: row) {
-        for (auto [fst, snd]: cat->chars2) {
-            counts[fst] += snd;
-        }
-    }
-
-    return counts;
-}
-
 long long Day16::Part2() {
     const auto lines = Helpers::readFile(16, 2);
     vector<int> spinCounts{};

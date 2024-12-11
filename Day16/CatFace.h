@@ -54,6 +54,18 @@ struct LinkedNode {
         return adjustPosition(wheels, false);
     }
 
+    bool operator<(const LinkedNode &other) const {
+        return value < other.value;
+    }
+
+    bool operator>(const LinkedNode &other) const {
+        return value > other.value;
+    }
+
+    bool operator==(const LinkedNode &other) const {
+        return positions == other.positions;
+    }
+
 private:
     int calculateValue() const {
         std::map<char, int> counts{};
@@ -83,6 +95,26 @@ private:
             else result.push_back(absolute % size);
         }
         return result;
+    }
+};
+
+struct NodeScore {
+    explicit NodeScore(LinkedNode *platform): node(platform), distance(platform->value) {
+    }
+
+    LinkedNode *node;
+    int distance;
+
+    bool operator<(const NodeScore &other) const {
+        return distance > other.distance;
+    }
+
+    bool operator>(const NodeScore &other) const {
+        return distance < other.distance;
+    }
+
+    bool operator==(const NodeScore &other) const {
+        return node->positions == other.node->positions;
     }
 };
 

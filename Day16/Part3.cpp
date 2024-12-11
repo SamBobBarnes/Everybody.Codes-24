@@ -1,3 +1,4 @@
+#include <queue>
 #include <set>
 
 #include "CatFace.h"
@@ -69,10 +70,54 @@ int Day16::Part3() {
         node.down = &*ranges::find_if(
             nodes, [down](const LinkedNode &p) { return p.equals(down); });
     }
-
-    auto start = &nodes[0];
     //dijkstra
 
+    NodeScore start{&nodes[0]};
+
+    map<LinkedNode *, int> dist{{start.node, 0}};
+    map<LinkedNode *, LinkedNode *> prev{{start.node, nullptr}};
+
+    for (auto &node: nodes) {
+        NodeScore i{&node};
+        if (&node == start.node) continue;
+        dist.insert({&node, Helpers::Max});
+        prev.insert({&node, nullptr});
+    }
+
+    priority_queue<NodeScore> q{};
+    q.push(start);
+
+    while (!q.empty()) {
+        auto u = q.top();
+        q.pop();
+
+        //next
+        NodeScore v{u.node->next};
+        auto alt = dist[u.node] + v.distance;
+        if (alt < dist[v.node]) {
+            dist[v.node] = alt;
+            prev[v.node] = u.node;
+            q.push(v);
+        }
+
+        //up
+        NodeScore vu{u.node->up->next};
+        auto altU = dist[u.node] + vu.distance;
+        if (altU < dist[vu.node]) {
+            dist[vu.node] = altU;
+            prev[vu.node] = u.node;
+            q.push(vu);
+        }
+
+        //down
+        NodeScore vd{u.node->down->next};
+        auto altD = dist[u.node] + vd.distance;
+        if (altD < dist[vd.node]) {
+            dist[vd.node] = altD;
+            prev[vd.node] = u.node;
+            q.push(vd);
+        }
+    }
 
     return 0;
 }

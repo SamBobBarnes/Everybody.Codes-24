@@ -43,7 +43,7 @@ add_executable(Everybody_Codes_24 main.cpp
         Day8/Part1.cpp
         Day8/Part2.cpp
         Day8/Part3.cpp
-Day9/Day9.h
+        Day9/Day9.h
         Day9/Part1.cpp
         Day9/Part2.cpp
         Day9/Part3.cpp
@@ -52,15 +52,15 @@ Day9/Day9.h
         Day10/Part1.cpp
         Day10/Part2.cpp
         Day10/Part3.cpp
-Day11/Day11.h
+        Day11/Day11.h
         Day11/Part1.cpp
         Day11/Part2.cpp
         Day11/Part3.cpp
-Day12/Day12.h
+        Day12/Day12.h
         Day12/Part1.cpp
         Day12/Part2.cpp
         Day12/Part3.cpp
-Day13/Day13.h
+        Day13/Day13.h
         Day13/Part1.cpp
         Day13/Part2.cpp
         Day13/Part3.cpp

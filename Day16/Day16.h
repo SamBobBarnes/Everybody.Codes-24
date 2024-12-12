@@ -29,6 +29,8 @@ public:
     static void GenerateCombinations(vector<vector<CatFace> > *wheels, set<vector<int> > *faceCombos,
                                      const vector<int> &currentCombo = {},
                                      int index = 0);
+
+    static int GetLimit(const LinkedNode *current, const bool max, const int depth, const int maxDepth = 256);
 };
 
 #endif //DAY16_H
